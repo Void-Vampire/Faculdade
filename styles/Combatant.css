@@ -1,0 +1,94 @@
+.Combatant {
+  display: flex;
+  flex-direction: column;
+}
+
+.sprite {
+  position: absolute;
+}
+
+.sprite[data-team="hero"] {
+  transform: scale(1.5);
+}
+
+.sprite[data-team="enemy"] {
+  transform: scale(0.4);
+}
+
+.sprite[data-team="enemy"].enemy-e_e1 {
+  left: -70px;
+  bottom: -20px;
+}
+
+.sprite[data-team="enemy"].enemy-e_e2 {
+  left: 40px;
+  bottom: 70px;
+}
+
+.sprite[data-team="enemy"].enemy-e_e3 {
+  left: 120px;
+  bottom: 0px;
+}
+
+.sprite[data-team="enemy"].wolff {
+  transform: scale(0.2);
+}
+
+.sprite[data-team="hero"].hero-hero1 {
+  right: 70px;
+  bottom: 80px;
+}
+
+.sprite[data-team="hero"].hero-hero2 {
+  right: 70px;
+  bottom: 120px;
+}
+
+.Combatant[data-team="hero"] .name {
+  margin-top: 2px;
+  color: white;
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 3px 6px;
+  border-radius: 3px;
+}
+
+.Combatant.hero-hero1 .name {
+  right: 0;
+  bottom: 40px; /* Ajuste a posição conforme necessário */
+}
+
+.Combatant.hero-hero2 .name {
+  right: 0;
+  bottom: 80px; /* Ajuste a posição conforme necessário */
+}
+
+.Combatant[data-team="hero"] .hp-text {
+  color: red; /* Cor do texto de HP */
+  font-size: 14px; /* Tamanho da fonte do texto de HP */
+  position: absolute;
+  
+}
+
+.Combatant[data-team="hero"] .mp-text {
+  color: blue;
+  font-size: 14px; /* Tamanho da fonte do texto de HP */
+  position: absolute;
+}
+
+
+.Combatant.hero-hero2 .hp-text {
+  right: 0px;
+  bottom: 50px;
+}
+
+.Combatant.hero-hero2 .mp-text {
+  right: 12px;
+  bottom: 50px;
+}
+
+
+
+
+
+
