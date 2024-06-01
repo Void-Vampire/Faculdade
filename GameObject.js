@@ -16,11 +16,11 @@ class GameObject {
         this.behaviorLoopIndex = 0;
 
         this.talking = config.talking || [];
+        this.retryTimeout = null;
     }
 
     mount(map) {
         this.isMounted = true;
-        map.addWall(this.x,this.y);
 
         // Se ele tiver um comportamento, começar apos um pequeno delay
         setTimeout(() => {
@@ -35,10 +35,23 @@ class GameObject {
     async doBehaviorEvent(map) { 
 
         
-        // Verifica se tem alguma configuração
-        if (map.isCutscenePlaying || this.behaviorLoop.length === 0 || this.isStanding) {
-          return;
-        }
+    //Don't do anything if there is a more important cutscene or I don't have config to do anything
+    //anyway.
+    if (map.isCutscenePlaying || this.behaviorLoop.length === 0 || this.isStanding) {
+      return;
+    }
+
+    if (map.isCutscenePlaying) {
+
+      console.log("will retry", this.id)
+      if (this.retryTimeout) {
+        clearTimeout(this.retryTimeout);
+      }
+      this.retryTimeout = setTimeout(() => {
+        this.doBehaviorEvent(map);
+      }, 1000)
+      return;
+    }
     
         //Setando Evento com Informaçoes Relevantes
         let eventConfig = this.behaviorLoop[this.behaviorLoopIndex];

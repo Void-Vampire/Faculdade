@@ -1,0 +1,46 @@
+.TitleScreen {
+    position: absolute;
+    width: 396px;
+    height: 396px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background: url('/image/logo.png') no-repeat center center;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    text-align: center;
+  }
+  
+  .TitleScreen .KeyboardMenu {
+    position: relative;
+    width: 200px;
+    margin-top: 200px;
+    background: transparent;
+    border: 0;
+  }
+  .TitleScreen button {
+    color: #fff;
+    justify-content: center;
+    padding: 10px 20px;
+    background: rgba(0, 0, 0, 0.5); /* Um fundo semitransparente para os botões */
+    border: 1px solid #fff;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+
+  .TitleScreen button:hover {
+    background: rgba(255, 255, 255, 0.2); /* Efeito hover para os botões */
+  }
+  
+  .TitleScreen .DescriptionBox {
+    background: transparent;
+    color: #fff;
+    border: 0;
+    text-align: center;
+    margin-top: 20px;
+  }
+  

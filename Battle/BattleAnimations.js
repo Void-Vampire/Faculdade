@@ -14,29 +14,24 @@ window.BattleAnimations = {
       onComplete();
     },
 
-    async createOrb(event, onComplete) {
-      const { caster, target } = event;
-      const orb = document.createElement("div");
-      orb.classList.add("orb");
-      
-      // Calcula a posição central do alvo
-  const targetRect = target.spriteElement.getBoundingClientRect();
-  const targetCenterX = targetRect.left + targetRect.width / 2;
-  const targetCenterY = targetRect.top + targetRect.height / 2;
+    async fire(event, onComplete) {
+      const { caster,target } = event;
+      const fireElement = document.createElement("div");
+      fireElement.classList.add("fire-animation");
   
-  // Define a posição do orb com base na posição central do alvo
-  orb.style.left = `${targetCenterX}px`; // Posição horizontal central
-  orb.style.top = `${targetCenterY}px`; // Posição vertical central
-      document.body.appendChild(orb);
-
-      
+      // Posicione a animação de fogo sobre o alvo
+      const targetRect = target.spriteElement.getBoundingClientRect();
+      fireElement.style.left = `${targetRect.left + (targetRect.width / 2) - 0}px`; // Ajuste conforme necessário
+      fireElement.style.top = `${targetRect.top + (targetRect.height / 2) - 0}px`; // Ajuste conforme necessário
+  
+      document.body.appendChild(fireElement);
 
       if (caster.team === "hero") {
         caster.spriteElement.classList.add("hero-move-left");
       } else {
         caster.spriteElement.classList.add("enemy-move-right");
       }
-      await utils.wait(100);
+      await utils.wait(200);
       setTimeout(() => {
         if (caster.team === "hero") {
           caster.spriteElement.classList.remove("hero-move-left");
@@ -46,13 +41,347 @@ window.BattleAnimations = {
       }, 500);
   
       // Aguarde um curto período para a animação ser visível
-      await utils.wait(100);
+      await utils.wait(200);
   
-      // Remova o orbe após a animação
-      orb.classList.add("disappear");
-      orb.addEventListener("animationend", () => {
-        orb.remove();
+      // Adicione a classe de impacto para a animação de erupção
+      fireElement.classList.add("impact");
+      fireElement.addEventListener("animationend", () => {
+        fireElement.remove();
         onComplete();
-      });
-    }
+      }, { once: true });
+
+      // Aguarde a duração da animação mais um pouco antes de continuar
+    await utils.wait(2000); // 1500ms da animação + 500ms do move
+    onComplete();
+    },
+
+    async water(event, onComplete) {
+      const { caster,target } = event;
+      const fireElement = document.createElement("div");
+      fireElement.classList.add("water-animation");
+  
+      // Posicione a animação de fogo sobre o alvo
+      const targetRect = target.spriteElement.getBoundingClientRect();
+      fireElement.style.left = `${targetRect.left + (targetRect.width / 2) - 0}px`; // Ajuste conforme necessário
+      fireElement.style.top = `${targetRect.top + (targetRect.height / 2) - 0}px`; // Ajuste conforme necessário
+  
+      document.body.appendChild(fireElement);
+
+      if (caster.team === "hero") {
+        caster.spriteElement.classList.add("hero-move-left");
+      } else {
+        caster.spriteElement.classList.add("enemy-move-right");
+      }
+      await utils.wait(200);
+      setTimeout(() => {
+        if (caster.team === "hero") {
+          caster.spriteElement.classList.remove("hero-move-left");
+        } else {
+          caster.spriteElement.classList.remove("enemy-move-right");
+        }
+      }, 500);
+  
+      // Aguarde um curto período para a animação ser visível
+      await utils.wait(200);
+  
+      // Adicione a classe de impacto para a animação de erupção
+      fireElement.classList.add("impact");
+      fireElement.addEventListener("animationend", () => {
+        fireElement.remove();
+        onComplete();
+      }, { once: true });
+
+      // Aguarde a duração da animação mais um pouco antes de continuar
+    await utils.wait(2000); // 1500ms da animação + 500ms do move
+    onComplete();
+    },
+
+    async ice(event, onComplete) {
+      const { caster,target } = event;
+      const fireElement = document.createElement("div");
+      fireElement.classList.add("ice-animation");
+  
+      // Posicione a animação de fogo sobre o alvo
+      const targetRect = target.spriteElement.getBoundingClientRect();
+      fireElement.style.left = `${targetRect.left + (targetRect.width / 2) - 0}px`; // Ajuste conforme necessário
+      fireElement.style.top = `${targetRect.top + (targetRect.height / 2) - 0}px`; // Ajuste conforme necessário
+  
+      document.body.appendChild(fireElement);
+
+      if (caster.team === "hero") {
+        caster.spriteElement.classList.add("hero-move-left");
+      } else {
+        caster.spriteElement.classList.add("enemy-move-right");
+      }
+      await utils.wait(200);
+      setTimeout(() => {
+        if (caster.team === "hero") {
+          caster.spriteElement.classList.remove("hero-move-left");
+        } else {
+          caster.spriteElement.classList.remove("enemy-move-right");
+        }
+      }, 500);
+  
+      // Aguarde um curto período para a animação ser visível
+      await utils.wait(200);
+  
+      // Adicione a classe de impacto para a animação de erupção
+      fireElement.classList.add("impact");
+      fireElement.addEventListener("animationend", () => {
+        fireElement.remove();
+        onComplete();
+      }, { once: true });
+
+      // Aguarde a duração da animação mais um pouco antes de continuar
+    await utils.wait(2000); // 1500ms da animação + 500ms do move
+    onComplete();
+    },
+
+    async bolt(event, onComplete) {
+      const { caster,target } = event;
+      const fireElement = document.createElement("div");
+      fireElement.classList.add("bolt-animation");
+  
+      // Posicione a animação de fogo sobre o alvo
+      const targetRect = target.spriteElement.getBoundingClientRect();
+      fireElement.style.left = `${targetRect.left + (targetRect.width / 2) - 0}px`; // Ajuste conforme necessário
+      fireElement.style.top = `${targetRect.top + (targetRect.height / 2) - 0}px`; // Ajuste conforme necessário
+  
+      document.body.appendChild(fireElement);
+
+      if (caster.team === "hero") {
+        caster.spriteElement.classList.add("hero-move-left");
+      } else {
+        caster.spriteElement.classList.add("enemy-move-right");
+      }
+      await utils.wait(200);
+      setTimeout(() => {
+        if (caster.team === "hero") {
+          caster.spriteElement.classList.remove("hero-move-left");
+        } else {
+          caster.spriteElement.classList.remove("enemy-move-right");
+        }
+      }, 500);
+  
+      // Aguarde um curto período para a animação ser visível
+      await utils.wait(200);
+  
+      // Adicione a classe de impacto para a animação de erupção
+      fireElement.classList.add("impact");
+      fireElement.addEventListener("animationend", () => {
+        fireElement.remove();
+        onComplete();
+      }, { once: true });
+
+      // Aguarde a duração da animação mais um pouco antes de continuar
+    await utils.wait(2000); // 1500ms da animação + 500ms do move
+    onComplete();
+    },
+
+    async drain(event, onComplete) {
+      const { caster,target } = event;
+      const fireElement = document.createElement("div");
+      fireElement.classList.add("drain-animation");
+  
+      // Posicione a animação de fogo sobre o alvo
+      const targetRect = target.spriteElement.getBoundingClientRect();
+      fireElement.style.left = `${targetRect.left + (targetRect.width / 2) - 0}px`; // Ajuste conforme necessário
+      fireElement.style.top = `${targetRect.top + (targetRect.height / 2) - 0}px`; // Ajuste conforme necessário
+  
+      document.body.appendChild(fireElement);
+
+      if (caster.team === "hero") {
+        caster.spriteElement.classList.add("hero-move-left");
+      } else {
+        caster.spriteElement.classList.add("enemy-move-right");
+      }
+      await utils.wait(200);
+      setTimeout(() => {
+        if (caster.team === "hero") {
+          caster.spriteElement.classList.remove("hero-move-left");
+        } else {
+          caster.spriteElement.classList.remove("enemy-move-right");
+        }
+      }, 500);
+  
+      // Aguarde um curto período para a animação ser visível
+      await utils.wait(200);
+  
+      // Adicione a classe de impacto para a animação de erupção
+      fireElement.classList.add("impact");
+      fireElement.addEventListener("animationend", () => {
+        fireElement.remove();
+        onComplete();
+      }, { once: true });
+
+      // Aguarde a duração da animação mais um pouco antes de continuar
+    await utils.wait(2000); // 1500ms da animação + 500ms do move
+    onComplete();
+    },
+
+    async flood(event, onComplete) {
+      const { caster,target } = event;
+      const drainElement = document.createElement("div");
+      drainElement.classList.add("flood-animation");
+  
+      // Posicione a animação de fogo sobre o alvo
+      const targetRect = target.spriteElement.getBoundingClientRect();
+      drainElement.style.left = `${targetRect.left + (targetRect.width / 2) - 0}px`; // Ajuste conforme necessário
+      drainElement.style.top = `${targetRect.top + (targetRect.height / 2) - 0}px`; // Ajuste conforme necessário
+  
+      document.body.appendChild(drainElement);
+
+      if (caster.team === "hero") {
+        caster.spriteElement.classList.add("hero-move-left");
+      } else {
+        caster.spriteElement.classList.add("enemy-move-right");
+      }
+      await utils.wait(200);
+      setTimeout(() => {
+        if (caster.team === "hero") {
+          caster.spriteElement.classList.remove("hero-move-left");
+        } else {
+          caster.spriteElement.classList.remove("enemy-move-right");
+        }
+      }, 500);
+  
+      // Aguarde um curto período para a animação ser visível
+      await utils.wait(200);
+  
+      // Adicione a classe de impacto para a animação de erupção
+      drainElement.classList.add("impact");
+      drainElement.addEventListener("animationend", () => {
+        drainElement.remove();
+        onComplete();
+      }, { once: true });
+
+      // Aguarde a duração da animação mais um pouco antes de continuar
+    await utils.wait(2000); // 1500ms da animação + 500ms do move
+    onComplete();
+    },
+
+    async thunder(event, onComplete) {
+      const { caster,target } = event;
+      const drainElement = document.createElement("div");
+      drainElement.classList.add("thunder-animation");
+  
+      // Posicione a animação de fogo sobre o alvo
+      const targetRect = target.spriteElement.getBoundingClientRect();
+      drainElement.style.left = `${targetRect.left + (targetRect.width / 2) - 0}px`; // Ajuste conforme necessário
+      drainElement.style.top = `${targetRect.top + (targetRect.height / 2) - 0}px`; // Ajuste conforme necessário
+  
+      document.body.appendChild(drainElement);
+
+      if (caster.team === "hero") {
+        caster.spriteElement.classList.add("hero-move-left");
+      } else {
+        caster.spriteElement.classList.add("enemy-move-right");
+      }
+      await utils.wait(200);
+      setTimeout(() => {
+        if (caster.team === "hero") {
+          caster.spriteElement.classList.remove("hero-move-left");
+        } else {
+          caster.spriteElement.classList.remove("enemy-move-right");
+        }
+      }, 500);
+  
+      // Aguarde um curto período para a animação ser visível
+      await utils.wait(200);
+  
+      // Adicione a classe de impacto para a animação de erupção
+      drainElement.classList.add("impact");
+      drainElement.addEventListener("animationend", () => {
+        drainElement.remove();
+        onComplete();
+      }, { once: true });
+
+      // Aguarde a duração da animação mais um pouco antes de continuar
+    await utils.wait(2000); // 1500ms da animação + 500ms do move
+    onComplete();
+    },
+
+    async flash(event, onComplete) {
+      const { caster,target } = event;
+      const drainElement = document.createElement("div");
+      drainElement.classList.add("flash-animation");
+  
+      // Posicione a animação de fogo sobre o alvo
+      const targetRect = target.spriteElement.getBoundingClientRect();
+      drainElement.style.left = `${targetRect.left + (targetRect.width / 2) - 0}px`; // Ajuste conforme necessário
+      drainElement.style.top = `${targetRect.top + (targetRect.height / 2) - 0}px`; // Ajuste conforme necessário
+  
+      document.body.appendChild(drainElement);
+
+      if (caster.team === "hero") {
+        caster.spriteElement.classList.add("hero-move-left");
+      } else {
+        caster.spriteElement.classList.add("enemy-move-right");
+      }
+      await utils.wait(200);
+      setTimeout(() => {
+        if (caster.team === "hero") {
+          caster.spriteElement.classList.remove("hero-move-left");
+        } else {
+          caster.spriteElement.classList.remove("enemy-move-right");
+        }
+      }, 500);
+  
+      // Aguarde um curto período para a animação ser visível
+      await utils.wait(200);
+  
+      // Adicione a classe de impacto para a animação de erupção
+      drainElement.classList.add("impact");
+      drainElement.addEventListener("animationend", () => {
+        drainElement.remove();
+        onComplete();
+      }, { once: true });
+
+      // Aguarde a duração da animação mais um pouco antes de continuar
+    await utils.wait(2000); // 1500ms da animação + 500ms do move
+    onComplete();
+    },
+
+    async sleep(event, onComplete) {
+      const { caster,target } = event;
+      const drainElement = document.createElement("div");
+      drainElement.classList.add("sleep-animation");
+  
+      // Posicione a animação de fogo sobre o alvo
+      const targetRect = target.spriteElement.getBoundingClientRect();
+      drainElement.style.left = `${targetRect.left + (targetRect.width / 2) - 0}px`; // Ajuste conforme necessário
+      drainElement.style.top = `${targetRect.top + (targetRect.height / 2) - 0}px`; // Ajuste conforme necessário
+  
+      document.body.appendChild(drainElement);
+
+      if (caster.team === "hero") {
+        caster.spriteElement.classList.add("hero-move-left");
+      } else {
+        caster.spriteElement.classList.add("enemy-move-right");
+      }
+      await utils.wait(200);
+      setTimeout(() => {
+        if (caster.team === "hero") {
+          caster.spriteElement.classList.remove("hero-move-left");
+        } else {
+          caster.spriteElement.classList.remove("enemy-move-right");
+        }
+      }, 500);
+  
+      // Aguarde um curto período para a animação ser visível
+      await utils.wait(200);
+  
+      // Adicione a classe de impacto para a animação de erupção
+      drainElement.classList.add("impact");
+      drainElement.addEventListener("animationend", () => {
+        drainElement.remove();
+        onComplete();
+      }, { once: true });
+
+      // Aguarde a duração da animação mais um pouco antes de continuar
+    await utils.wait(2000); // 1500ms da animação + 500ms do move
+    onComplete();
+    },
+
+
   }

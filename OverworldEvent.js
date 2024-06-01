@@ -60,9 +60,18 @@ class OverworldEvent {
 
       changeMap(resolve) {
 
+        //Desativa Objetos de outros mapas que não seja o ativo
+      Object.values(this.map.gameObjects).forEach(obj => {
+      obj.isMounted = false;
+    })
+
         const sceneTransition = new SceneTransition();
         sceneTransition.init(document.querySelector(".game-container"), () => {
-          this.map.overworld.startMap( window.OverworldMaps[this.event.map] );
+          this.map.overworld.startMap( window.OverworldMaps[this.event.map], {
+            x: this.event.x,
+            y: this.event.y,
+            direction: this.event.direction,
+          });
           resolve();
     
           sceneTransition.fadeOut();
@@ -74,13 +83,31 @@ class OverworldEvent {
         const enemyId = this.event.enemyId; // Atribua o ID do inimigo a uma variável para facilitar a depuração
         const enemyData = window.Enemies[enemyId]; // Obtenha os dados do inimigo usando o ID
         const battle = new Battle({
-          onComplete: () => {
-            resolve();
+          onComplete: (didWin) => {
+            resolve(didWin ? "WON_BATTLE" : "LOST_BATTLE");
           },
           enemy: enemyData
         })
         battle.init(document.querySelector(".game-container"));
     
+      }
+
+      pause(resolve) {
+        this.map.isPaused = true;
+        const menu = new PauseMenu({
+          progress: this.map.overworld.progress,
+          onComplete: () => {
+            resolve();
+            this.map.isPaused = false;
+            this.map.overworld.startGameLoop();
+          }
+        });
+        menu.init(document.querySelector(".game-container"));
+      }
+
+      addStoryFlag(resolve) {
+        window.playerState.storyFlags[this.event.flag] = true;
+        resolve();
       }
     
     

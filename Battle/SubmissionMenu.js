@@ -74,8 +74,9 @@ class SubmissionMenu {
             if (key === 'melee_attack') return null;
             const action = Actions[key];
             return {
-              label: action.name,
+              label: `${action.name} (MP: ${action.mpCost || 0})`,
               description: action.description,
+              disabled: this.caster.mp < action.mpCost,
               handler: () => {
                 this.menuSubmit(action)
               }
@@ -115,7 +116,9 @@ class SubmissionMenu {
   
     decide() {
       // Inimigos iram randomicamente decidir o que fazer 
-      this.menuSubmit(Actions[ this.caster.actions[0] ]);
+    const randomIndex = Math.floor(Math.random() * this.caster.actions.length);
+    const randomAction = Actions[this.caster.actions[randomIndex]];
+    this.menuSubmit(randomAction);
     }
 
     showMenu(container) {

@@ -5,6 +5,7 @@ class Combatant {
       })
       this.battle = battle;
       this.hp = typeof(this.hp) === "undefined" ? this.maxHp : this.hp;
+      this.mp = typeof(this.mp) === "undefined" ? this.maxMp : this.mp;
       this.originalDefense = this.defense;
     }
   
@@ -22,19 +23,24 @@ class Combatant {
       this.hudElement.setAttribute("data-combatant", this.id);
       this.hudElement.setAttribute("data-team", this.team);
 
+      this.hudContainer = document.createElement("div");
+      this.hudContainer.classList.add("hud");
+
       if (this.team === "hero") {
-        this.hudElement.innerHTML += `
-        <div class="name">${this.name}</div>
-        <div class="hp-text">HP: ${this.hp}/${this.maxHp}</div>
-        <div class="mp-text">MP: ${this.mp}/${this.maxMp}</div>
-        
+        this.hudContainer.innerHTML = `
+          <div class="name">${this.name}</div>
+          <div class="hp-text">HP: ${this.hp}/${this.maxHp}</div>
+          <div class="mp-text">MP: ${this.mp}/${this.maxMp}</div>
         `;
-    }
-    if (this.team === "enemy") {
-      this.hudElement.innerHTML += `
-      <div class="name">${this.name}</div>
-      <div class="hp-text">HP: ${this.hp}/${this.maxHp}</div>`;
-  }
+      }
+      if (this.team === "enemy") {
+        this.hudContainer.innerHTML = `
+          <div class="name">${this.name}</div>
+          <div class="hp-text">HP: ${this.hp}/${this.maxHp}</div>
+        `;
+      }
+
+      this.hudElement.appendChild(this.hudContainer);
       
       this.spriteElement = document.createElement("img");
       this.spriteElement.classList.add("sprite");
@@ -48,7 +54,6 @@ class Combatant {
 
       this.hudElement.classList.add(`enemy-${this.id}`);
       this.spriteElement.classList.add(`enemy-${this.id}`);
-
   }
 
     update(changes = {}) {
@@ -61,12 +66,23 @@ class Combatant {
         this.hp = 0;
       }
 
+      if (this.mp < 0) {
+        this.mp = 0;
+      }
       if ('hp' in changes) {
         const hpText = this.hudElement.querySelector('.hp-text');
         if (hpText) {
           hpText.textContent = `HP: ${this.hp}/${this.maxHp}`;
         }
       }
+      
+      if ('mp' in changes) {
+        const mpText = this.hudElement.querySelector('.mp-text');
+        if (mpText) {
+          mpText.textContent = `MP: ${this.mp}/${this.maxMp}`;
+        }
+      }
+
     }
 
   getReplacedEvents(originalEvents) {
@@ -81,41 +97,41 @@ class Combatant {
       return originalEvents;
     }
 
-  getPostEvents() {
-    if (this.status?.type === "armor" && !this.status.applied) {
-      this.status.applied = true;
-      return [
-        { type: "textMessage", text: "Mais Armadura" },
-        { type: "stateChange", armor: 10, onCaster: true }
-      ]
+    getPostEvents() {
+      if (this.status?.type === "armor" && !this.status.applied) {
+        this.status.applied = true;
+        return [
+          { type: "textMessage", text: `${this.name} recebeu mais armadura!` },
+          { type: "stateChange", armor: 10, onCaster: true }
+        ];
+      }
+      return [];
     }
 
-    
-    return [];
-  }
-
-  decrementStatus() {
-    if (this.status?.expiresIn > 0) {
-      this.status.expiresIn -= 1;
-      if (this.status.expiresIn === 0) {
-        if (this.status.type === "armor") {
-          this.update({ defense: this.originalDefense }); // Remover o efeito de armadura
-        }
-        this.update({ status: null }); // Remover o status completamente
-        return {
-          type: "textMessage",
-          text: "Status expired!"
+    decrementStatus() {
+      if (this.status?.expiresIn > 0) {
+        this.status.expiresIn -= 1;
+        if (this.status.expiresIn === 0) {
+          const expiredStatusType = this.status.type;
+          const characterName = this.name; // Obtém o nome do personagem
+          if (expiredStatusType === "armor") {
+            this.update({ defense: this.originalDefense }); // Remover o efeito de armadura
+          }
+          this.status = null; // Remover o status completamente
+          return {
+            type: "textMessage",
+            text: `O efeito ${expiredStatusType} de ${characterName} acabou!`
+          };
         }
       }
+      return null;
     }
-    return null;
-  }
 
     init(container) {
       this.createElement();
       container.appendChild(this.hudElement);
       container.appendChild(this.spriteElement);
-      
+      this.update();
     }
 
 }

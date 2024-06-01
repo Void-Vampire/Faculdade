@@ -3,109 +3,150 @@ class TurnCycle {
     this.battle = battle;
     this.onNewEvent = onNewEvent;
     this.onWinner = onWinner;
-    this.currentTeam = "hero"; //or "enemy"
+    this.currentTeamIndex = 0; // Índice da equipe atual na lista de equipes ativas
+    this.teams = ["hero", "enemy"];
+    this.totalEnemyXP = 0; 
   }
 
   async turn() {
-    //Get the caster
-    const casterId = this.battle.activeCombatants[this.currentTeam];
-    const caster = this.battle.combatants[casterId];
-    const enemyId = this.battle.activeCombatants[caster.team === "hero" ? "enemy" : "hero"]
-    const enemy = this.battle.combatants[enemyId];
+    const currentTeam = this.teams[this.currentTeamIndex];
+    const activeCombatants = this.battle.activeCombatants[currentTeam];
 
-    const submission = await this.onNewEvent({
-      type: "submissionMenu",
-      caster,
-      enemy
-    })
+    // Loop através dos combatentes ativos do time atual
+    for (let i = 0; i < activeCombatants.length; i++) {
+      const casterId = activeCombatants[i];
+      const caster = this.battle.combatants[casterId];
+      const enemyTeam = currentTeam === "hero" ? "enemy" : "hero";
+      const enemyTeamCombatants = this.battle.activeCombatants[enemyTeam];
+      const randomEnemyIndex = Math.floor(Math.random() * enemyTeamCombatants.length);
+      const enemyId = enemyTeamCombatants[randomEnemyIndex];
+      const enemy = this.battle.combatants[enemyId];
 
-    if (submission.instanceId) {
-
-      // Adicionar a lista para persistir no Player State mais tarde
-      this.battle.usedInstaceIds[submission.instanceId] = true;
-
-      // Removendo Items da Batalha
-      this.battle.items = this.battle.items.filter(i => i.instanceId !== submission.instanceId)
-    }
-
-    const resultingEvents = caster.getReplacedEvents(submission.action.success);
-    
-    for (let i=0; i<resultingEvents.length; i++) {
-      const event = {
-        ...resultingEvents[i],
-        submission,
-        action: submission.action,
+      // Obter ação do jogador e processar
+      const submission = await this.onNewEvent({
+        type: "submissionMenu",
         caster,
-        target: submission.target,
+        enemy,
+      });
+
+      if (submission.instanceId) {
+
+        //Add to list to persist to player state later
+        this.battle.usedInstanceIds[submission.instanceId] = true;
+  
+        //Removing item from battle state
+        this.battle.items = this.battle.items.filter(item => item.instanceId !== submission.instanceId)
       }
-      await this.onNewEvent(event);
-    }
 
-    // Verificar se o Alvo Morreu
-    const targetDead = submission.target.hp <= 0;
-    if (targetDead) {
-      await this.onNewEvent({ 
-        type: "textMessage", text: `${submission.target.name} Caiu!`
-      })
-
-      if (submission.target.team === "enemy") {
-
-        const playerActiveHeroId = this.battle.activeCombatants.hero;
-        const xp = submission.target.givesXp;
-
-        await this.onNewEvent({
-          type: "textMessage",
-          text: `Gained ${xp} XP!`
-        })
-        await this.onNewEvent({
-          type: "giveXp",
-          xp,
-          combatant: this.battle.combatants[playerActiveHeroId]
-        })
+      // Processar eventos resultantes da ação do jogador
+      const resultingEvents = caster.getReplacedEvents(submission.action.success);
+      for (let i=0; i<resultingEvents.length; i++) {
+        const event = {
+          ...resultingEvents[i],
+          submission,
+          action: submission.action,
+          caster,
+          target: submission.target,
+        }
+        await this.onNewEvent(event);
       }
-    }
+    
 
-    // Verificar Equipe Vencedora
+      // Remover combatente se o alvo estiver sem vida
+      if (submission.target.hp <= 0) {
+        const targetTeam = submission.target.team;
+        const targetIndex = this.battle.activeCombatants[targetTeam].indexOf(submission.target.id);
+        if (targetIndex !== -1) {
+          this.battle.activeCombatants[targetTeam].splice(targetIndex, 1);
+          
+          // Verificar se o alvo é um inimigo e exibir uma mensagem de morte
+          if (submission.target.team === "enemy") {
+            await this.onNewEvent({
+              type: "textMessage",
+              text: `${submission.target.name} foi derrotado!`
+            });
+          }
+        }
+        if (submission.target.team === "enemy") {
+          this.totalEnemyXP += submission.target.givesXp; // Acumular experiência dos inimigos
+        }
+      }
+
+    // Execute post-turn events
+    const postEvents = [];
+  Object.values(this.battle.combatants).forEach(caster => {
+    if (caster.hp > 0) {
+      postEvents.push(...caster.getPostEvents());
+    }
+  });
+  for (let l = 0; l < postEvents.length; l++) {
+    const event = {
+      ...postEvents[l],
+      submission,
+      action: submission.action,
+      caster,
+      target: submission.target, 
+    };
+    await this.onNewEvent(event);
+  }
+
+    // Verificar se a batalha terminou
     const winner = this.getWinningTeam();
     if (winner) {
+      await this.distributeEnemyXP();
       await this.onNewEvent({
         type: "textMessage",
         text: "Winner!"
-      })
-      if (typeof this.onWinner === "function") {
-        this.onWinner(winner);
-      } else {
-        console.error("onWinner is not a function:", this.onWinner);
-      }
-      return;
+      });
+      
+      this.onWinner(winner); // Chama o manipulador de evento para informar o vencedor
+      return; // Retorna para evitar a chamada recursiva desnecessária
     }
-
-    //Verficar Eventos Pós Turno
-    //(Fazer alguma coisa após o turno)
-    const postEvents = caster.getPostEvents();
-    for (let i=0; i < postEvents.length; i++ ) {
-      const event = {
-        ...postEvents[i],
-        submission,
-        action: submission.action,
-        caster,
-        target: submission.target, 
-      }
-      await this.onNewEvent(event);
-    }
-
-    //Check for status expire
+  }
+  const expiredEvents = [];
+  Object.values(this.battle.combatants).forEach(caster => {
     const expiredEvent = caster.decrementStatus();
     if (expiredEvent) {
-      await this.onNewEvent(expiredEvent)
+      expiredEvents.push(expiredEvent);
     }
+  }); 
+  for (let k = 0; k < expiredEvents.length; k++) {
+    await this.onNewEvent(expiredEvents[k]);
+  }
 
+    // Avançar para o próximo turno
     this.nextTurn();
   }
 
   nextTurn() {
-    this.currentTeam = this.currentTeam === "hero" ? "enemy" : "hero";
-    this.turn();
+    this.currentTeamIndex = (this.currentTeamIndex + 1) % this.teams.length;
+    this.turn(); // Chama o próximo turno
+  }
+
+  
+
+  async distributeEnemyXP() {
+    const heroCount = Object.values(this.battle.combatants).filter(c => c.team === "hero").length;
+    const xpPerHero = Math.floor(this.totalEnemyXP / heroCount);
+    for (const c of Object.values(this.battle.combatants)) {
+      if (c.team === "hero") {
+        const event = {
+          type: "giveXp",
+          xp: xpPerHero,
+          combatant: c
+        };
+        const battleEvent = new BattleEvent(event, this.battle);
+      await new Promise(resolve => {
+        battleEvent.giveXp(resolve);
+      });
+  
+        // Mostrar a mensagem de quanto de exp o personagem ganhou
+        await this.onNewEvent({
+          type: "textMessage",
+          text: `${c.name} gained ${xpPerHero} XP!`
+        });
+      }
+    }
   }
 
   getWinningTeam() {
@@ -114,9 +155,9 @@ class TurnCycle {
       if (c.hp > 0) {
         aliveTeams[c.team] = true;
       }
-    })
-    if (!aliveTeams["hero"]) { return "enemy"}
-    if (!aliveTeams["enemy"]) { return "hero"}
+    });
+    if (!aliveTeams["hero"]) { return "enemy"; }
+    if (!aliveTeams["enemy"]) { return "hero"; }
     return null;
   }
 
@@ -124,11 +165,9 @@ class TurnCycle {
     await this.onNewEvent({
       type: "textMessage",
       text: "The battle is starting!"
-    })
+    });
 
-    //Start the first turn!
+    // Iniciar o primeiro turno
     this.turn();
-
   }
-
 }

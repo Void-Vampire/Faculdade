@@ -19,51 +19,33 @@
     animation: battle-damage-blink 0.3s steps(2, start) infinite;
   }
   
+  /* Animação do ataque base */
+
   @keyframes battle-spin-right {
-    0% { transform: translate3d(0,0,0) rotate(0deg) scale(0.5)}
-    25% { transform: translate3d(155px,-30px,0) rotate(45deg) scale(0.5)}
-    100% { transform: translate3d(0,0,0) scale(0.5)}
+    0% { transform: translate3d(0,0,0) rotate(0deg) scale(1.5)}
+    25% { transform: translate3d(155px,-30px,0) rotate(45deg) scale(1.5)}
+    100% { transform: translate3d(0,0,0) scale(1.5)}
   }
   .battle-spin-right {
     animation: battle-spin-right 0.8s;
   }
   @keyframes battle-spin-left {
-    0% { transform: translate3d(0,0,0) rotate(0deg) scale(2)}
-    25% { transform: translate3d(-100%, 25%,0) rotate(45deg) scale(2)}
-    100% { transform: translate3d(0,0,0) scale(2)}
+    0% { transform: translate3d(0,0,0) rotate(0deg) scale(1.5)}
+    25% { transform: translate3d(-100%, 25%,0) rotate(45deg) scale(1.5)}
+    100% { transform: translate3d(0,0,0) scale(1.5)}
   }
   .battle-spin-left {
     animation: battle-spin-left 0.8s;
   }
 
-  .orb {
-    position: absolute;
-    width: 60px; /* Ajuste conforme necessário */
-    height: 60px; /* Ajuste conforme necessário */
-    border-radius: 50%;
-    background: radial-gradient(circle, lightblue, #6ba1ff);
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-  }
-  
-  @keyframes orb-disappear {
-    0% {
-      opacity: 1;
-    }
-    100% {
-      opacity: 0;
-    }
-  }
-  
-  .disappear {
-    animation: orb-disappear 1s forwards;
-  }
+  /* Animação de movimentação ao usar magia */
 
   .hero-move-left {
-    animation: move-left 0.5s forwards; /* Animação de movimento para a esquerda */
+    animation: move-left 1s forwards; /* Animação de movimento para a esquerda */
   }
   
   .enemy-move-right {
-    animation: move-right 0.5s forwards; /* Animação de movimento para a direita */
+    animation: move-right 1s forwards; /* Animação de movimento para a direita */
   }
   
   @keyframes move-left {
@@ -72,6 +54,216 @@
   }
   
   @keyframes move-right {
-    0% { transform: translateX(0) scale(0.5); }
-    100% { transform: translateX(40px) scale(0.5); } /* Movimento para a direita */
+    0% { transform: translateX(0) scale(1.5); }
+    100% { transform: translateX(40px) scale(1.5); } /* Movimento para a direita */
   }
+
+/* Animação de fogo */
+.fire-animation {
+  position: absolute;
+  width: 60px; /* Ajuste conforme necessário */
+  height: 60px; /* Ajuste conforme necessário */
+  background-image: url('/image/animations/fire.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  z-index: 10; /* Certifique-se de que a animação de fogo está acima dos sprites */
+}
+
+@keyframes fire-impact {
+  0% {
+    opacity: 1;
+    transform: scale(3);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(3);
+  }
+}
+
+/* Animação de water */
+.water-animation {
+  position: absolute;
+  width: 60px; /* Ajuste conforme necessário */
+  height: 60px; /* Ajuste conforme necessário */
+  background-image: url('/image/animations/water.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  z-index: 10; /* Certifique-se de que a animação de fogo está acima dos sprites */
+}
+
+@keyframes water-impact {
+  0% {
+    opacity: 1;
+    transform: scale(3);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(3);
+  }
+}
+
+/* Animação de ice */
+.ice-animation {
+  position: absolute;
+  width: 60px; /* Ajuste conforme necessário */
+  height: 60px; /* Ajuste conforme necessário */
+  background-image: url('/image/animations/ice.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  z-index: 10; /* Certifique-se de que a animação de fogo está acima dos sprites */
+}
+
+@keyframes ice-impact {
+  0% {
+    opacity: 1;
+    transform: scale(3);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(3);
+  }
+}
+
+/* Animação de bolt */
+.bolt-animation {
+  position: absolute;
+  width: 30px; /* Ajuste conforme necessário */
+  height: 30px; /* Ajuste conforme necessário */
+  background-image: url('/image/animations/bolt.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  z-index: 10; /* Certifique-se de que a animação de fogo está acima dos sprites */
+}
+
+@keyframes bolt-impact {
+  0% {
+    opacity: 1;
+    transform: scale(2);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(2);
+  }
+}
+
+/* Animação de drain */
+.drain-animation {
+  position: absolute;
+  width: 60px; /* Ajuste conforme necessário */
+  height: 60px; /* Ajuste conforme necessário */
+  background-image: url('/image/animations/drain.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  z-index: 10; /* Certifique-se de que a animação de fogo está acima dos sprites */
+}
+
+@keyframes drain-impact {
+  0% {
+    opacity: 1;
+    transform: scale(3);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(3);
+  }
+}
+
+/* Animação de flood */
+.flood-animation {
+  position: absolute;
+  width: 120px; /* Ajuste conforme necessário */
+  height: 120px; /* Ajuste conforme necessário */
+  background-image: url('/image/animations/flood.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  z-index: 10; /* Certifique-se de que a animação de fogo está acima dos sprites */
+}
+
+@keyframes flood-impact {
+  0% {
+    opacity: 1;
+    transform: scale(7);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(7);
+  }
+}
+
+/* Animação de thunder */
+.thunder-animation {
+  position: absolute;
+  width: 60px; /* Ajuste conforme necessário */
+  height: 60px; /* Ajuste conforme necessário */
+  background-image: url('/image/animations/thunder.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  z-index: 10; /* Certifique-se de que a animação de fogo está acima dos sprites */
+}
+
+@keyframes thunder-impact {
+  0% {
+    opacity: 1;
+    transform: scale(5);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(5);
+  }
+}
+
+/* Animação de flash */
+.flash-animation {
+  position: absolute;
+  width: 60px; /* Ajuste conforme necessário */
+  height: 60px; /* Ajuste conforme necessário */
+  background-image: url('/image/animations/flash.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  z-index: 10; /* Certifique-se de que a animação de fogo está acima dos sprites */
+}
+
+@keyframes flash-impact {
+  0% {
+    opacity: 1;
+    transform: scale(3);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(3);
+  }
+}
+
+.sleep-animation {
+  position: absolute;
+  width: 60px; /* Ajuste conforme necessário */
+  height: 60px; /* Ajuste conforme necessário */
+  background-image: url('/image/animations/sleep.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  z-index: 10; /* Certifique-se de que a animação de fogo está acima dos sprites */
+}
+
+@keyframes sleep-impact {
+  0% {
+    opacity: 1;
+    transform: scale(3);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(3);
+  }
+}
+
+/* Impacto das animaçoes */
+.impact {
+  animation: fire-impact 1.5s forwards;
+  animation: water-impact 1.5s forwards;
+  animation: ice-impact 1.5s forwards;
+  animation: bolt-impact 1.5s forwards;
+  animation: drain-impact 1.5s forwards;
+  animation: flood-impact 1.5s forwards;
+  animation: thunder-impact 1.5s forwards;
+  animation: flash-impact 1.5s forwards;
+  animation: sleep-impact 1.5s forwards;
+}

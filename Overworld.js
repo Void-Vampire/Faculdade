@@ -35,9 +35,11 @@ class Overworld {
       object.sprite.draw(this.ctx, cameraPerson);
     })
 
-    requestAnimationFrame(() => {
-      step();
-    })
+    if (!this.map.isPaused) {
+      requestAnimationFrame(() => {
+        step();   
+      })
+    }
   }
   step();
  }
@@ -46,6 +48,13 @@ class Overworld {
   new KeyPressListener("Enter", () => {
     //Is there a person here to talk to?
     this.map.checkForActionCutscene()
+  })
+  new KeyPressListener("Escape", () => {
+    if (!this.map.isCutscenePlaying) {
+     this.map.startCutscene([
+       { type: "pause" }
+     ])
+    }
   })
 }
 
@@ -58,18 +67,55 @@ bindHeroPositionCheck() {
   })
 }
 
-startMap(mapConfig) {
+startMap(mapConfig,heroInitialState=null) {
   this.map = new OverworldMap(mapConfig);
   this.map.overworld = this;
   this.map.mountObjects();
+
+  if (heroInitialState) {
+    const {hero} = this.map.gameObjects;
+    hero.x = heroInitialState.x;
+    hero.y = heroInitialState.y;
+    hero.direction = heroInitialState.direction;
+  }
+
+  this.progress.mapId = mapConfig.id;
+  this.progress.startingHeroX = this.map.gameObjects.hero.x;
+  this.progress.startingHeroY = this.map.gameObjects.hero.y;
+  this.progress.startingHeroDirection = this.map.gameObjects.hero.direction;
+
+  console.log(this.map.walls)
+
  }
 
  // Primeiro Mapa
- init() {
+ async init() {
+
+  const container = document.querySelector(".game-container");
+
+  // Criar um novo progreso
+  this.progress = new Progress();
+
+  // Mostre a tela do inicio
+  this.titleScreen = new TitleScreen({
+    progress: this.progress
+  })
+  const useSaveFile = await this.titleScreen.init(container);
+
+  // Carregar Save Data
+  let initialHeroState = null;
+  if (useSaveFile) {
+    this.progress.load();
+    initialHeroState = {
+      x: this.progress.startingHeroX,
+      y: this.progress.startingHeroY,
+      direction: this.progress.startingHeroDirection,
+    }
+  }
 
   // this.hud = new Hud()
 
-  this.startMap(window.OverworldMaps.Forest1);
+  this.startMap(window.OverworldMaps[this.progress.mapId], initialHeroState );
   console.log(this.map.encounterZones);
 
   this.bindActionInput();
@@ -80,7 +126,7 @@ startMap(mapConfig) {
 
   this.startGameLoop();
 
-  // Cutscenes
+  // Cutscenes  
  };
   
 }

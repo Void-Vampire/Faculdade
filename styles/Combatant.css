@@ -1,6 +1,19 @@
 .Combatant {
   display: flex;
   flex-direction: column;
+  position: absolute;
+}
+
+.Combatant[data-team="hero"] {
+  align-items: flex-end;
+}
+
+.hud {
+  background-color: rgba(0, 0, 0, 0.7);
+  padding: 5px;
+  border-radius: 5px;
+  color: white;
+  text-align: right;
 }
 
 .sprite {
@@ -12,82 +25,146 @@
 }
 
 .sprite[data-team="enemy"] {
-  transform: scale(0.4);
+  transform: scale(1.5);
 }
 
+/* Normal Enemies Sprite */
+
 .sprite[data-team="enemy"].enemy-e_e1 {
-  left: -70px;
-  bottom: -20px;
+  left: 80px;
+  bottom: 170px;
 }
 
 .sprite[data-team="enemy"].enemy-e_e2 {
-  left: 40px;
-  bottom: 70px;
+  left: 150px;
+  bottom: 120px;
 }
 
 .sprite[data-team="enemy"].enemy-e_e3 {
-  left: 120px;
-  bottom: 0px;
+  left: 80px;
+  bottom: 70px;
 }
 
-.sprite[data-team="enemy"].wolff {
-  transform: scale(0.2);
+/* Mini Bosses Sprite */
+
+.sprite[data-team="enemy"].enemy-e_m1 {
+  left: 100px;
+  bottom: 150px;
 }
+
+.sprite[data-team="enemy"].enemy-e_m2 {
+  left: 200px;
+  bottom: 70px;
+}
+
+.sprite[data-team="enemy"].enemy-e_m3 {
+  left: 250px;
+  bottom: 140px;
+}
+
+.sprite[data-team="enemy"].enemy-e_b1 {
+  left: 60px;
+  bottom: 70px;
+  transform: scale(1.5);
+}
+
+/* Hero Sprites */
 
 .sprite[data-team="hero"].hero-hero1 {
+  right: 160px;
+  bottom: 120px;
+}
+
+.sprite[data-team="hero"].hero-hero2 {
+  right: 80px;
+  bottom: 120px;
+}
+
+.sprite[data-team="hero"].hero-hero3 {
   right: 70px;
   bottom: 80px;
 }
 
-.sprite[data-team="hero"].hero-hero2 {
-  right: 70px;
-  bottom: 120px;
+.sprite[data-team="hero"].hero-hero4 {
+  right: 150px;
+  bottom: 80px;
 }
 
-.Combatant[data-team="hero"] .name {
+/* HUD Nome, HP e MP */
+
+.hud .name {
   margin-top: 2px;
-  color: white;
-  position: absolute;
-  background-color: rgba(0, 0, 0, 0.5);
-  padding: 3px 6px;
-  border-radius: 3px;
+  font-size: 13px;
 }
 
-.Combatant.hero-hero1 .name {
-  right: 0;
-  bottom: 40px; /* Ajuste a posição conforme necessário */
+.hud .hp-text,
+.hud .mp-text {
+  font-size: 13px;
 }
 
-.Combatant.hero-hero2 .name {
-  right: 0;
-  bottom: 80px; /* Ajuste a posição conforme necessário */
+.hud .hp-text {
+  color: red;
 }
 
-.Combatant[data-team="hero"] .hp-text {
-  color: red; /* Cor do texto de HP */
-  font-size: 14px; /* Tamanho da fonte do texto de HP */
-  position: absolute;
-  
-}
-
-.Combatant[data-team="hero"] .mp-text {
+.hud .mp-text {
   color: blue;
-  font-size: 14px; /* Tamanho da fonte do texto de HP */
-  position: absolute;
 }
 
+/* Posição do HUD */
 
-.Combatant.hero-hero2 .hp-text {
+.Combatant.hero-hero1 {
+  right: 100px;
+  top: 0;
+}
+
+.Combatant.hero-hero2 {
   right: 0px;
-  bottom: 50px;
+  top: 0;
 }
 
-.Combatant.hero-hero2 .mp-text {
-  right: 12px;
-  bottom: 50px;
+.Combatant.hero-hero3 {
+  right: 0px;
+  top: 70px;
+}
+.Combatant.hero-hero4 {
+  right: 100px;
+  top: 70px;
 }
 
+.Combatant.enemy-e_e1 {
+  left: 0;
+  top: 0;
+}
 
+.Combatant.enemy-e_e2 {
+  left: 0;
+  top: 50px;
+}
+
+.Combatant.enemy-e_e3 {
+  left: 0;
+  top: 100px;
+}
+
+.Combatant.enemy-e_m1 {
+  left: 0;
+  top: 0px;
+}
+
+.Combatant.enemy-e_m2 {
+  left: 0;
+  top: 50px;
+}
+
+.Combatant.enemy-e_m3 {
+  left: 0;
+  top: 100px;
+}
+
+.Combatant.enemy-e_b1 {
+  left: 0;
+  top: 0;
+}
 
 
 

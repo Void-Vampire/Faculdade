@@ -3,27 +3,20 @@ class Battle {
 
     this.enemy = enemy;
     this.onComplete = onComplete;
-    console.log("Enemy:", enemy);
-
-this.combatants = {}
+    this.combatants = {}
 
   this.activeCombatants = {
-    hero: null,
-    enemy: null,
+    hero: [], 
+    enemy: [],
   }
 
   // Hero Team
-  if (window.playerState && window.playerState.lineup) {
     window.playerState.lineup.forEach((id) => {
       this.addCombatant(id, "hero", window.playerState.hero[id]);
-    });
-  } else {
-    console.error("Player state lineup is missing.");
-  }
+      });
+  
 
   // Enemy Team
-  
-    // Se todos os níveis de propriedade existirem, prossiga
     Object.keys(this.enemy.enemies).forEach((key) => {
       this.addCombatant("e_" + key, "enemy", this.enemy.enemies[key]);
     });
@@ -42,10 +35,6 @@ this.combatants = {}
 }
 
 addCombatant(id, team, config) {
-  if (!config || !config.id) {
-    console.error("Invalid config or id missing for combatant:", id);
-    return;
-  }
 
   this.combatants[id] = new Combatant({
     ...window.enemies[config.id],
@@ -54,8 +43,7 @@ addCombatant(id, team, config) {
     isPlayerControlled: team === "hero",
   }, this);
 
-  console.log(this);
-  this.activeCombatants[team] = this.activeCombatants[team] || id;
+  this.activeCombatants[team].push(id);
 }
 
   createElement() {
@@ -106,7 +94,7 @@ addCombatant(id, team, config) {
           }
           
           this.element.remove();
-          this.onComplete();
+          this.onComplete(winner === "hero");
         }
       })
       this.turnCycle.init();
