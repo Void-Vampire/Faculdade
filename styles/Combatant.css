@@ -97,6 +97,11 @@
   font-size: 13px;
 }
 
+.hud .level {
+  font-size: 13px;
+  margin-top: 2px;
+}
+
 .hud .hp-text,
 .hud .mp-text {
   font-size: 13px;
@@ -124,11 +129,11 @@
 
 .Combatant.hero-hero3 {
   right: 0px;
-  top: 70px;
+  top: 90px;
 }
 .Combatant.hero-hero4 {
   right: 100px;
-  top: 70px;
+  top: 90px;
 }
 
 .Combatant.enemy-e_e1 {
