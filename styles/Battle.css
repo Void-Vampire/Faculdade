@@ -16,7 +16,7 @@
     } 
   }
   .battle-damage-blink {
-    animation: battle-damage-blink 0.3s steps(2, start) infinite;
+    animation: battle-damage-blink 0.4s steps(2, start) infinite;
   }
   
   /* Animação do ataque base */
@@ -27,7 +27,7 @@
     100% { transform: translate3d(0,0,0) scale(1.5)}
   }
   .battle-spin-right {
-    animation: battle-spin-right 0.8s;
+    animation: battle-spin-right 0.9s;
   }
   @keyframes battle-spin-left {
     0% { transform: translate3d(0,0,0) rotate(0deg) scale(1.5)}
@@ -35,7 +35,7 @@
     100% { transform: translate3d(0,0,0) scale(1.5)}
   }
   .battle-spin-left {
-    animation: battle-spin-left 0.8s;
+    animation: battle-spin-left 0.9s;
   }
 
   /* Animação de movimentação ao usar magia */
@@ -127,8 +127,8 @@
 /* Animação de bolt */
 .bolt-animation {
   position: absolute;
-  width: 30px; /* Ajuste conforme necessário */
-  height: 30px; /* Ajuste conforme necessário */
+  width: 60px; /* Ajuste conforme necessário */
+  height: 60px; /* Ajuste conforme necessário */
   background-image: url('/image/animations/bolt.png');
   background-size: contain;
   background-repeat: no-repeat;
@@ -182,19 +182,19 @@
 @keyframes flood-impact {
   0% {
     opacity: 1;
-    transform: scale(7);
+    transform: scale(3);
   }
   100% {
     opacity: 0;
-    transform: scale(7);
+    transform: scale(3);
   }
 }
 
 /* Animação de thunder */
 .thunder-animation {
   position: absolute;
-  width: 60px; /* Ajuste conforme necessário */
-  height: 60px; /* Ajuste conforme necessário */
+  width: 120px; /* Ajuste conforme necessário */
+  height: 120px; /* Ajuste conforme necessário */
   background-image: url('/image/animations/thunder.png');
   background-size: contain;
   background-repeat: no-repeat;
@@ -204,11 +204,11 @@
 @keyframes thunder-impact {
   0% {
     opacity: 1;
-    transform: scale(5);
+    transform: scale(3);
   }
   100% {
     opacity: 0;
-    transform: scale(5);
+    transform: scale(3);
   }
 }
 
@@ -234,6 +234,7 @@
   }
 }
 
+/* Animação de sleep */
 .sleep-animation {
   position: absolute;
   width: 60px; /* Ajuste conforme necessário */
@@ -255,6 +256,226 @@
   }
 }
 
+/* Animação de blast */
+.blast-animation {
+  position: absolute;
+  width: 120px; /* Ajuste conforme necessário */
+  height: 120px; /* Ajuste conforme necessário */
+  background-image: url('/image/animations/blast.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  z-index: 10; /* Certifique-se de que a animação de fogo está acima dos sprites */
+}
+
+@keyframes blast-impact {
+  0% {
+    opacity: 1;
+    transform: scale(3);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(3);
+  }
+}
+
+/* Animação de vulcan */
+.vulcan-animation {
+  position: absolute;
+  width: 120px; /* Ajuste conforme necessário */
+  height: 120px; /* Ajuste conforme necessário */
+  background-image: url('/image/animations/vulcan.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  z-index: 10; /* Certifique-se de que a animação de fogo está acima dos sprites */
+}
+
+@keyframes vulcan-impact {
+  0% {
+    opacity: 1;
+    transform: scale(3);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(3);
+  }
+}
+
+/* Animação de crystal */
+.crystal-animation {
+  position: absolute;
+  width: 120px; /* Ajuste conforme necessário */
+  height: 120px; /* Ajuste conforme necessário */
+  background-image: url('/image/animations/crystal.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  z-index: 10; /* Certifique-se de que a animação de fogo está acima dos sprites */
+}
+
+@keyframes crystal-impact {
+  0% {
+    opacity: 1;
+    transform: scale(3);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(3);
+  }
+}
+
+/* Animação de sleeps */
+.sleeps-animation {
+  position: absolute;
+  width: 60px; /* Ajuste conforme necessário */
+  height: 60px; /* Ajuste conforme necessário */
+  background-image: url('/image/animations/sleeps.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  z-index: 10; /* Certifique-se de que a animação de fogo está acima dos sprites */
+}
+
+@keyframes sleeps-impact {
+  0% {
+    opacity: 1;
+    transform: scale(3);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(3);
+  }
+}
+
+/* Animação de blizzard */
+.blizzard-animation {
+  position: absolute;
+  width: 120px; /* Ajuste conforme necessário */
+  height: 120px; /* Ajuste conforme necessário */
+  background-image: url('/image/animations/blizzard.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  z-index: 10; /* Certifique-se de que a animação de fogo está acima dos sprites */
+}
+
+@keyframes blizzard-impact {
+  0% {
+    opacity: 1;
+    transform: scale(3);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(3);
+  }
+}
+
+/* Animação de vampirism */
+.vampirism-animation {
+  position: absolute;
+  width: 60px; /* Ajuste conforme necessário */
+  height: 60px; /* Ajuste conforme necessário */
+  background-image: url('/image/animations/vampirism.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  z-index: 10; /* Certifique-se de que a animação de fogo está acima dos sprites */
+}
+
+@keyframes vampirism-impact {
+  0% {
+    opacity: 1;
+    transform: scale(3);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(3);
+  }
+}
+
+/* Animação de fire-sword */
+.fireSword-animation {
+  position: absolute;
+  width: 60px; /* Ajuste conforme necessário */
+  height: 60px; /* Ajuste conforme necessário */
+  background-image: url('/image/animations/fireSword.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  z-index: 10; /* Certifique-se de que a animação de fogo está acima dos sprites */
+}
+
+@keyframes fireSword-impact {
+  0% {
+    opacity: 1;
+    transform: scale(3);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(3);
+  }
+}
+
+/* Animação de water-sword */
+.waterSword-animation {
+  position: absolute;
+  width: 60px; /* Ajuste conforme necessário */
+  height: 60px; /* Ajuste conforme necessário */
+  background-image: url('/image/animations/water.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  z-index: 10; /* Certifique-se de que a animação de fogo está acima dos sprites */
+}
+
+@keyframes waterSword-impact {
+  0% {
+    opacity: 1;
+    transform: scale(3);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(3);
+  }
+}
+
+/* Animação de ice-sword */
+.iceSword-animation {
+  position: absolute;
+  width: 60px; /* Ajuste conforme necessário */
+  height: 60px; /* Ajuste conforme necessário */
+  background-image: url('/image/animations/ice.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  z-index: 10; /* Certifique-se de que a animação de fogo está acima dos sprites */
+}
+
+@keyframes iceSword-impact {
+  0% {
+    opacity: 1;
+    transform: scale(3);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(3);
+  }
+}
+
+/* Animação de ice-sword */
+.boltSword-animation {
+  position: absolute;
+  width: 60px; /* Ajuste conforme necessário */
+  height: 60px; /* Ajuste conforme necessário */
+  background-image: url('/image/animations/boltSword.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  z-index: 10; /* Certifique-se de que a animação de fogo está acima dos sprites */
+}
+
+@keyframes boltSword-impact {
+  0% {
+    opacity: 1;
+    transform: scale(3);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(3);
+  }
+}
+
 /* Impacto das animaçoes */
 .impact {
   animation: fire-impact 1.5s forwards;
@@ -266,4 +487,14 @@
   animation: thunder-impact 1.5s forwards;
   animation: flash-impact 1.5s forwards;
   animation: sleep-impact 1.5s forwards;
+  animation: blast-impact 1.5s forwards;
+  animation: vulcan-impact 1.5s forwards;
+  animation: crystal-impact 1.5s forwards;
+  animation: sleeps-impact 1.5s forwards; 
+  animation: blizzard-impact 1.5s forwards;
+  animation: vampirism-impact 1.5s forwards;
+  animation: fireSword-impact 1.5s forwards;
+  animation: waterSword-impact 1.5s forwards;
+  animation: iceSword-impact 1.5s forwards;
+  animation: boltSword-impact 1.5s forwards;
 }

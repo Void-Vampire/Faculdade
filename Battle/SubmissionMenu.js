@@ -60,18 +60,98 @@ class SubmissionMenu {
           }
         ],
         fight: [
-          {
-            label: Actions.melee_attack.name,
-            description: Actions.melee_attack.description,
-            handler: () => {
-              this.menuSubmit(Actions.melee_attack);
+          ...(this.caster.actions.includes('ishtarSword') ? [
+            {
+              label: Actions.ishtarSword.name,
+              description: Actions.ishtarSword.description,
+              handler: () => {
+                this.menuSubmit(Actions.ishtarSword);
+              }
             }
-          },
+          ] : []),
+
+          ...(this.caster.actions.includes('ishtarDualBlade') ? [
+            {
+              label: `${Actions.ishtarDualBlade.name} (MP: ${Actions.ishtarDualBlade.mpCost || 0})`,
+              description: Actions.ishtarDualBlade.description,
+              handler: () => {
+                this.menuSubmit(Actions.ishtarDualBlade);
+              }
+            }
+          ] : []),
+
+          ...(this.caster.actions.includes('freyaStaff') ? [
+            {
+              label: Actions.freyaStaff.name,
+              description: Actions.freyaStaff.description,
+              handler: () => {
+                this.menuSubmit(Actions.freyaStaff);
+              }
+            }
+          ] : []),
+
+          ...(this.caster.actions.includes('celestiaDarkStaff') ? [
+            {
+              label: Actions.celestiaDarkStaff.name,
+              description: Actions.celestiaDarkStaff.description,
+              handler: () => {
+                this.menuSubmit(Actions.celestiaDarkStaff);
+              }
+            }
+          ] : []),
+
+          ...(this.caster.actions.includes('celestiaVampirism') ? [
+            {
+              label: Actions.celestiaVampirism.name,
+              description: Actions.celestiaVampirism.description,
+              handler: () => {
+                this.menuSubmit(Actions.celestiaVampirism);
+              }
+            }
+          ] : []),
+
+          ...(this.caster.actions.includes('aerinRapier') ? [
+            {
+              label: Actions.aerinRapier.name,
+              description: Actions.aerinRapier.description,
+              handler: () => {
+                this.menuSubmit(Actions.aerinRapier);
+              }
+            }
+          ] : []),
+
+          ...(this.caster.actions.includes('aerinMagicDagger') ? [
+            {
+              label: `${Actions.aerinMagicDagger.name} (MP: ${Actions.aerinMagicDagger.mpCost || 0})`,
+              description: Actions.aerinMagicDagger.description,
+              handler: () => {
+                this.menuSubmit(Actions.aerinMagicDagger);
+              }
+            }
+          ] : []),
+
+          ...(this.caster.actions.includes('aerinBattleDance') ? [
+            {
+              label: `${Actions.aerinBattleDance.name} (MP: ${Actions.aerinBattleDance.mpCost || 0})`,
+              description: Actions.aerinBattleDance.description,
+              handler: () => {
+                this.menuSubmit(Actions.aerinBattleDance);
+              }
+            }
+          ] : []),
+
           backOption
         ],
         magics: [
           ...this.caster.actions.map(key => {
-            if (key === 'melee_attack') return null;
+            if (key === 'ishtarSword') return null;
+            if (key === 'ishtarDualBlade') return null;
+            if (key === 'freyaStaff') return null;
+            if (key === 'celestiaDarkStaff') return null;
+            if (key === 'celestiaVampirism') return null;
+            if (key === 'aerinMagicDagger') return null;
+            if (key === 'aerinRapier') return null;
+            if (key === 'aerinBattleDance') return null;
             const action = Actions[key];
             return {
               label: `${action.name} (MP: ${action.mpCost || 0})`,

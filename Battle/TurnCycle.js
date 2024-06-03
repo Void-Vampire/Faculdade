@@ -39,6 +39,7 @@ class TurnCycle {
       }
 
       // Processar eventos resultantes da ação do jogador
+      console.log('Status atual:', caster.statusEffects);
       const resultingEvents = caster.getReplacedEvents(submission.action.success);
       for (let i=0; i<resultingEvents.length; i++) {
         const event = {

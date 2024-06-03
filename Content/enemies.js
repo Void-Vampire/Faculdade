@@ -1,4 +1,15 @@
 window.Enemies = {
+  "teste": {
+    name: "Felicia",
+    enemies: {
+      "e1": {
+        id: 'Felicia',
+        ...window.enemies.s001,
+        
+      },
+    
+    }
+  },
     "Forest1": {
       name: "Forest1",
       enemies: { 
