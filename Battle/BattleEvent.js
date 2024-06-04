@@ -8,7 +8,7 @@ class BattleEvent {
     const text = this.event.text
       .replace("{CASTER}", this.event.caster?.name)
       .replace("{TARGET}", this.event.target?.name)
-      .replace("{ACTION}", this.event.action?.name);
+      .replace("{ACTION}", this.event.action?.name); 
     const message = new TextMessage({
       text,
       onComplete: () => {
@@ -23,11 +23,13 @@ class BattleEvent {
       caster,
       target,
       damage,
+      damageBreak,
       damageX,
       armor,
       status,
       potionRecover,
       potionManaRecover,
+      manaRecover,
       recover,
       RecoverX,
       attackModifier,
@@ -35,10 +37,12 @@ class BattleEvent {
       MagicDamage,
       magicModifier,
       mpCost,
+      magicDamageBreak,
       MagicDamageX,
       berserk,
       attackBoost,
       magicAttackBoost,
+      magicDefenseBoost,
       healthDamage,
       VampirismHP,
       VampirismMP,
@@ -66,6 +70,7 @@ class BattleEvent {
       if (target.hp <= 0) {
         // Remover o elemento do sprite do DOM
         target.spriteElement.remove();
+        target.hudElement.remove();
       } else {
         // Iniciar animação de dano
         target.spriteElement.classList.add("battle-damage-blink");
@@ -104,6 +109,7 @@ class BattleEvent {
       if (target.hp <= 0) {
         // Remover o elemento do sprite do DOM
         target.spriteElement.remove();
+        target.hudElement.remove();
       } else {
         // Iniciar animação de dano
         target.spriteElement.classList.add("battle-damage-blink");
@@ -111,6 +117,31 @@ class BattleEvent {
         affectedMembers.push(target);
       }
     }
+
+    if (damageBreak) {
+      // Calcular dano efetivo ignorando a defesa do alvo
+      let effectiveDamage = Math.floor(damageBreak + caster.attack * (attackModifier || 0));
+
+      // Certificar-se de que o dano efetivo seja pelo menos 1
+      effectiveDamage = Math.max(effectiveDamage, 1);
+
+      // Aplicar dano ao alvo
+      target.update({
+          hp: target.hp - effectiveDamage,
+      });
+
+      // Iniciar animação de dano
+      if (target.hp <= 0) {
+          // Remover o elemento do sprite do DOM
+          target.spriteElement.remove();
+          target.hudElement.remove();
+      } else {
+          // Iniciar animação de dano
+          target.spriteElement.classList.add("battle-damage-blink");
+
+          affectedMembers.push(target);
+      }
+  }
 
     if (damageX) {
       Object.values(this.battle.combatants).forEach((member) => {
@@ -122,9 +153,12 @@ class BattleEvent {
           effectiveDamageX = Math.floor(effectiveDamageX);
 
           let newHp = member.hp - effectiveDamageX;
-          if (newHp <= 0 && member !== target) {
-            newHp = 1; // Garantir que todos, exceto o target, sobrevivam com 1 de HP
-          }
+
+          if (member.hp >= 1) {
+            if (newHp <= 0 && member !== target) {
+             newHp = 1; // Garantir que todos, exceto o target, sobrevivam com 1 de HP
+           }
+         }
 
           member.update({
             hp: newHp,
@@ -134,6 +168,7 @@ class BattleEvent {
 
           if (member.hp <= 0) {
             member.spriteElement.remove();
+            member.hudElement.remove();
           } else {
             member.spriteElement.classList.add("battle-damage-blink");
           }
@@ -170,6 +205,7 @@ class BattleEvent {
       if (target.hp <= 0) {
         // Remover o elemento do sprite do DOM
         target.spriteElement.remove();
+        target.hudElement.remove();
       } else {
         // Iniciar animação de dano
         target.spriteElement.classList.add("battle-damage-blink");
@@ -177,6 +213,31 @@ class BattleEvent {
         affectedMembers.push(target);
       }
     }
+
+    if (magicDamageBreak) {
+      // Calcular dano efetivo ignorando a defesa do alvo
+      let effectiveMagicDamage = Math.floor(magicDamageBreak + caster.magicAttack * (magicModifier || 0));
+
+      // Certificar-se de que o dano efetivo seja pelo menos 1
+      effectiveMagicDamage = Math.max(effectiveMagicDamage, 1);
+
+      // Aplicar dano ao alvo
+      target.update({
+          hp: target.hp - effectiveMagicDamage,
+      });
+
+      // Iniciar animação de dano
+      if (target.hp <= 0) {
+          // Remover o elemento do sprite do DOM
+          target.spriteElement.remove();
+          target.hudElement.remove();
+      } else {
+          // Iniciar animação de dano
+          target.spriteElement.classList.add("battle-damage-blink");
+
+          affectedMembers.push(target);
+      }
+  }
 
     if (MagicDamageX) {
       Object.values(this.battle.combatants).forEach((member) => {
@@ -191,9 +252,13 @@ class BattleEvent {
           effectiveMagicDamageX = Math.floor(effectiveMagicDamageX);
 
           let newHp = member.hp - effectiveMagicDamageX;
-          if (newHp <= 0 && member !== target) {
+
+          if (member.hp >= 1) {
+           if (newHp <= 0 && member !== target) {
             newHp = 1; // Garantir que todos, exceto o target, sobrevivam com 1 de HP
           }
+        }
+        
 
           member.update({
             hp: newHp,
@@ -203,12 +268,14 @@ class BattleEvent {
 
           if (member.hp <= 0) {
             member.spriteElement.remove();
+            member.hudElement.remove();
           } else {
             member.spriteElement.classList.add("battle-damage-blink");
           }
         }
       });
     }
+    
     if (recover) {
       let newHp = who.hp + recover;
       if (newHp > who.maxHp) {
@@ -216,6 +283,17 @@ class BattleEvent {
       }
       who.update({
         hp: newHp,
+      });
+    }
+
+    if (manaRecover) {
+      let mpRecovered = Math.floor(manaRecover + caster.magicAttack * (magicModifier || 0));
+      let newMp = caster.mp + mpRecovered;
+      if (newMp > caster.maxMp) {
+        newMp = caster.maxMp;
+      }
+      caster.update({
+        mp: newMp,
       });
     }
 
@@ -307,6 +385,12 @@ class BattleEvent {
       });
     }
 
+    if (magicDefenseBoost) {
+      who.update({
+        magicDefense: who.originalMagicDefense + magicDefenseBoost,
+      });
+    }
+
     if (status) {
       who.applyStatus(status);
     }
@@ -356,14 +440,6 @@ class BattleEvent {
 
         // Aumentar os status do combatente de acordo com o nível
         if (combatant.level <= 5) {
-          combatant.maxHp = Math.floor(combatant.maxHp * 1.3);
-          combatant.maxMp = Math.floor(combatant.maxMp * 1.3);
-          combatant.attack = Math.floor(combatant.attack * 1.3);
-          combatant.defense = Math.floor(combatant.defense * 1.3);
-          combatant.magicAttack = Math.floor(combatant.magicAttack * 1.3);
-          combatant.magicDefense = Math.floor(combatant.magicDefense * 1.3);
-          combatant.maxXp = Math.floor(combatant.maxXp * 1.3);
-        } else if (combatant.level > 5 && combatant.level <= 10) {
           combatant.maxHp = Math.floor(combatant.maxHp * 1.2);
           combatant.maxMp = Math.floor(combatant.maxMp * 1.2);
           combatant.attack = Math.floor(combatant.attack * 1.2);
@@ -371,13 +447,21 @@ class BattleEvent {
           combatant.magicAttack = Math.floor(combatant.magicAttack * 1.2);
           combatant.magicDefense = Math.floor(combatant.magicDefense * 1.2);
           combatant.maxXp = Math.floor(combatant.maxXp * 1.35);
-        } else if (combatant.level > 10 && combatant.level <= 20) {
+        } else if (combatant.level > 5 && combatant.level <= 10) {
           combatant.maxHp = Math.floor(combatant.maxHp * 1.15);
           combatant.maxMp = Math.floor(combatant.maxMp * 1.15);
           combatant.attack = Math.floor(combatant.attack * 1.15);
           combatant.defense = Math.floor(combatant.defense * 1.15);
           combatant.magicAttack = Math.floor(combatant.magicAttack * 1.15);
           combatant.magicDefense = Math.floor(combatant.magicDefense * 1.15);
+          combatant.maxXp = Math.floor(combatant.maxXp * 1.35);
+        } else if (combatant.level > 10 && combatant.level <= 20) {
+          combatant.maxHp = Math.floor(combatant.maxHp * 1.12);
+          combatant.maxMp = Math.floor(combatant.maxMp * 1.12);
+          combatant.attack = Math.floor(combatant.attack * 1.12);
+          combatant.defense = Math.floor(combatant.defense * 1.12);
+          combatant.magicAttack = Math.floor(combatant.magicAttack * 1.12);
+          combatant.magicDefense = Math.floor(combatant.magicDefense * 1.12);
           combatant.maxXp = Math.floor(combatant.maxXp * 1.4);
         } else if (combatant.level > 20 && combatant.level <= 40) {
           combatant.maxHp = Math.floor(combatant.maxHp * 1.1);

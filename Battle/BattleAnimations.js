@@ -805,4 +805,32 @@ window.BattleAnimations = {
     await utils.wait(2000); // 1500ms da animação + 500ms do move
     onComplete();
   },
+
+  async arrow(event, onComplete) {
+    const { target } = event;
+    const drainElement = document.createElement("div");
+    drainElement.classList.add("arrow-animation");
+
+    // Posicione a animação de fogo sobre o alvo
+    const targetRect = target.spriteElement.getBoundingClientRect();
+    drainElement.style.left = `${targetRect.left + targetRect.width / 2 - 0}px`; // Ajuste conforme necessário
+    drainElement.style.top = `${targetRect.top + targetRect.height / 2 - 0}px`; // Ajuste conforme necessário
+
+    document.body.appendChild(drainElement);
+
+    // Adicione a classe de impacto para a animação de erupção
+    drainElement.classList.add("impact");
+    drainElement.addEventListener(
+      "animationend",
+      () => {
+        drainElement.remove();
+        onComplete();
+      },
+      { once: true }
+    );
+
+    // Aguarde a duração da animação mais um pouco antes de continuar
+    await utils.wait(2000); // 1500ms da animação + 500ms do move
+    onComplete();
+  },
 };

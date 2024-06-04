@@ -578,6 +578,15 @@ window.OverworldMaps = {
         },
       ],
     },
+    /*
+    encounterZones: {
+      [utils.asGridCoord(9, 13)]: [
+        {
+          events: [{ type: "battle", enemyId: "teste" }],
+        },
+      ],
+    }
+    */
   },
   Forest2: {
     id: "Forest2",

@@ -86,6 +86,21 @@ class SubmissionMenu {
             ]
           : []),
 
+          ...(this.caster.actions.includes("ishtarSonicBlade")
+          ? [
+              {
+                label: `${Actions.ishtarSonicBlade.name} (MP: ${
+                  Actions.ishtarSonicBlade.mpCost || 0
+                })`,
+                description: Actions.ishtarSonicBlade.description,
+                disabled: this.caster.mp < (Actions.ishtarSonicBlade.mpCost || 0),
+                handler: () => {
+                  this.menuSubmit(Actions.ishtarSonicBlade);
+                },
+              },
+            ]
+          : []),
+
         ...(this.caster.actions.includes("freyaStaff")
           ? [
               {
@@ -93,6 +108,33 @@ class SubmissionMenu {
                 description: Actions.freyaStaff.description,
                 handler: () => {
                   this.menuSubmit(Actions.freyaStaff);
+                },
+              },
+            ]
+          : []),
+
+          ...(this.caster.actions.includes("freyaMeditate")
+          ? [
+              {
+                label: Actions.freyaMeditate.name,
+                description: Actions.freyaMeditate.description,
+                handler: () => {
+                  this.menuSubmit(Actions.freyaMeditate);
+                },
+              },
+            ]
+          : []),
+
+          ...(this.caster.actions.includes("freyaRainofBlades")
+          ? [
+              {
+                label: `${Actions.freyaRainofBlades.name} (MP: ${
+                  Actions.freyaRainofBlades.mpCost || 0
+                })`,
+                description: Actions.freyaRainofBlades.description,
+                disabled: this.caster.mp < (Actions.freyaRainofBlades.mpCost || 0),
+                handler: () => {
+                  this.menuSubmit(Actions.freyaRainofBlades);
                 },
               },
             ]
@@ -133,6 +175,7 @@ class SubmissionMenu {
               },
             ]
           : []),
+
         ...(this.caster.actions.includes("aerinMagicDagger")
           ? [
             {
@@ -143,6 +186,21 @@ class SubmissionMenu {
               disabled: this.caster.mp < (Actions.aerinMagicDagger.mpCost || 0),
               handler: () => {
                 this.menuSubmit(Actions.aerinMagicDagger);
+              },
+            },
+          ]
+          : []),
+
+          ...(this.caster.actions.includes("aerinInfusionBlade")
+          ? [
+            {
+              label: `${Actions.aerinInfusionBlade.name} (MP: ${
+                Actions.aerinInfusionBlade.mpCost || 0
+              })`,
+              description: Actions.aerinInfusionBlade.description,
+              disabled: this.caster.mp < (Actions.aerinInfusionBlade.mpCost || 0),
+              handler: () => {
+                this.menuSubmit(Actions.aerinInfusionBlade);
               },
             },
           ]
@@ -170,11 +228,15 @@ class SubmissionMenu {
           .map((key) => {
             if (key === "ishtarSword") return null;
             if (key === "ishtarDualBlade") return null;
+            if (key === "ishtarSonicBlade") return null;
             if (key === "freyaStaff") return null;
+            if (key === "freyaMeditate") return null;
+            if (key === "freyaRainofBlades") return null;
             if (key === "celestiaDarkStaff") return null;
             if (key === "celestiaVampirism") return null;
             if (key === "aerinMagicDagger") return null;
             if (key === "aerinRapier") return null;
+            if (key === "aerinInfusionBlade") return null;
             if (key === "aerinBattleDance") return null;
             const action = Actions[key];
             return {

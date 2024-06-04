@@ -1,7 +1,22 @@
 window.Enemies = {
+  /*
+  teste: {
+    // 310 de EXP, 77 EXP para cada Heroi
+    name: "teste",
+    enemies: {
+      e3: {
+        id: "greenOrb1",
+        ...window.enemies.s010,
+        name: "Green Orb",
+        defense: 5000,
+      },
+  },
+},
+*/
   Forest1: {
     // 310 de EXP, 77 EXP para cada Heroi
     name: "Forest1",
+    music: "theme/Battle.mp3",
     enemies: {
       e1: {
         id: "bat1",
@@ -23,6 +38,7 @@ window.Enemies = {
   Forest2: {
     // 395 de EXP 98 EXP para cada Heroi
     name: "Forest2",
+    music: "theme/Battle.mp3",
     enemies: {
       e1: {
         id: "slime1",
@@ -43,6 +59,7 @@ window.Enemies = {
   },
   Forest3: {
     name: "Forest3",
+    music: "theme/Battle.mp3",
     // 410 de EXP 102 EXP para cada Heroi
     enemies: {
       e1: {
@@ -65,6 +82,7 @@ window.Enemies = {
   Forest4: {
     // 530 de EXP 132 EXP para cada Heroi
     name: "Forest4",
+    music: "theme/Battle.mp3",
     enemies: {
       e1: {
         id: "salamandra1",
@@ -86,6 +104,7 @@ window.Enemies = {
   Forest5: {
     // 540 de EXP 135 EXP para cada Heroi
     name: "Forest5",
+    music: "theme/Battle.mp3",
     enemies: {
       e1: {
         id: "worm1",
@@ -107,6 +126,7 @@ window.Enemies = {
   Forest6: {
     // 630 de EXP 157 EXP para cada Heroi
     name: "Forest6",
+    music: "theme/Battle.mp3",
     enemies: {
       e1: {
         id: "anemone1",
@@ -128,6 +148,7 @@ window.Enemies = {
   Forest7: {
     // 910 de EXP 227 EXP para cada Heroi
     name: "Forest7",
+    music: "theme/Battle.mp3",
     enemies: {
       e1: {
         id: "anemone1",
@@ -149,6 +170,7 @@ window.Enemies = {
   Forest8: {
     // 800 de EXP 200 EXP para cada Heroi
     name: "Forest8",
+    music: "theme/Battle.mp3",
     enemies: {
       e1: {
         id: "anemone1",
@@ -170,6 +192,7 @@ window.Enemies = {
   Forest9: {
     // 1110 de EXP 277 EXP para cada Heroi
     name: "Forest9",
+    music: "theme/Battle.mp3",
     enemies: {
       e1: {
         id: "greenOrb1",
@@ -191,6 +214,7 @@ window.Enemies = {
   Forest10: {
     // 740 de EXP 185 EXP para cada Heroi
     name: "Forest10",
+    music: "theme/Battle.mp3",
     enemies: {
       e1: {
         id: "anemone1",
@@ -213,6 +237,7 @@ window.Enemies = {
   Floor1: {
     // 740 de EXP 185 EXP para cada Heroi
     name: "Floor1",
+    music: "theme/Battle.mp3",
     enemies: {
       e1: {
         id: "orc1",
@@ -234,6 +259,7 @@ window.Enemies = {
   Floor2: {
     // 740 de EXP 185 EXP para cada Heroi
     name: "Floor2",
+    music: "theme/Battle.mp3",
     enemies: {
       e1: {
         id: "mimic1",
@@ -255,6 +281,7 @@ window.Enemies = {
   Floor3: {
     // 740 de EXP 185 EXP para cada Heroi
     name: "Floor3",
+    music: "theme/Battle.mp3",
     enemies: {
       e1: {
         id: "spider1",
@@ -276,6 +303,7 @@ window.Enemies = {
   Floor4: {
     // 740 de EXP 185 EXP para cada Heroi
     name: "Floor4",
+    music: "theme/Battle.mp3",
     enemies: {
       e1: {
         id: "spider1",
@@ -297,6 +325,7 @@ window.Enemies = {
   Floor5: {
     // 740 de EXP 185 EXP para cada Heroi
     name: "Floor5",
+    music: "theme/Battle.mp3",
     enemies: {
       e1: {
         id: "miniDemon1",
@@ -318,6 +347,8 @@ window.Enemies = {
 
   House: {
     name: "House",
+    music: "theme/bossTheme.mp3",
+    musicVolume: 0.3,
     enemies: {
       m1: {
         id: "PegasusKnight",
@@ -338,6 +369,8 @@ window.Enemies = {
   },
   Floor1_1: {
     name: "Floor1_1",
+    music: "theme/bossTheme.mp3",
+    musicVolume: 0.2,
     enemies: {
       m1: {
         id: "PegasusKnight",
@@ -353,6 +386,8 @@ window.Enemies = {
   },
   Floor1_2: {
     name: "Floor1_2",
+    music: "theme/bossTheme.mp3",
+    musicVolume: 0.2,
     enemies: {
       m1: {
         id: "PegasusKnight",
@@ -368,6 +403,8 @@ window.Enemies = {
   },
   Floor1_3: {
     name: "Floor1_3",
+    music: "theme/bossTheme.mp3",
+    musicVolume: 0.2,
     enemies: {
       m1: {
         id: "PegasusKnight",
@@ -384,6 +421,8 @@ window.Enemies = {
 
   Boss1: {
     name: "Gades",
+    music: "theme/finalTheme.mp3",
+    musicVolume: 0.4,
     enemies: {
       e1: {
         id: "Gades",
@@ -393,6 +432,8 @@ window.Enemies = {
   },
   Boss2: {
     name: "Amon",
+    music: "theme/finalTheme.mp3",
+    musicVolume: 0.4,
     enemies: {
       e1: {
         id: "Amon",
@@ -402,6 +443,8 @@ window.Enemies = {
   },
   Boss3: {
     name: "Erim",
+    music: "theme/finalTheme.mp3",
+    musicVolume: 0.4,
     enemies: {
       e1: {
         id: "Erim",
@@ -411,6 +454,8 @@ window.Enemies = {
   },
   Boss4: {
     name: "Daos",
+    music: "theme/finalTheme.mp3",
+    musicVolume: 0.4,
     enemies: {
       e1: {
         id: "Daos",
@@ -420,6 +465,8 @@ window.Enemies = {
   },
   Boss5: {
     name: "Felicia",
+    music: "theme/feliciaTheme.mp3",
+    musicVolume: 1,
     enemies: {
       b1: {
         id: "Felicia",

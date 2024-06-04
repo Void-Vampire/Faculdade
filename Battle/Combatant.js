@@ -9,6 +9,7 @@ class Combatant {
     this.originalDefense = this.defense;
     this.originalAttack = this.attack;
     this.originalMagicAttack = this.magicAttack;
+    this.originalMagicDefense = this.magicDefense;
 
     this.statusEffects = {}; // Armazena múltiplos status
   }
@@ -163,6 +164,16 @@ class Combatant {
             magicAttackBoost: status.magicAttackBoost,
             onCaster: true,
           });
+        } else if (statusType === "magicDefenseBoost") { 
+          events.push({
+            type: "textMessage",
+            text: `${this.name} teve sua defesa mágica aumentada em ${status.magicDefenseBoost} por 3 turnos!`,
+          });
+          events.push({
+            type: "stateChange",
+            magicDefenseBoost: status.magicDefenseBoost,
+            onCaster: true,
+          });
         }
       }
     });
@@ -192,6 +203,9 @@ class Combatant {
           }
           if (statusType === "magicBoost") {
             this.update({ magicAttack: this.originalMagicAttack });
+          }
+          if (statusType === "magicDefenseBoost") { 
+            this.update({ magicDefense: this.originalMagicDefense });
           }
         }
       }

@@ -40,7 +40,7 @@ window.Actions = {
     ],
   },
   blow: {
-    name: "blow",
+    name: "Blow",
     description: "Causa dano fisico com a arma",
     success: [
       { type: "textMessage", text: "{CASTER} ataca com {ACTION}!" },
@@ -58,7 +58,7 @@ window.Actions = {
     ],
   },
   scissor: {
-    name: "scissor",
+    name: "Scissor",
     description: "Tesoura",
     success: [
       { type: "textMessage", text: "{CASTER} ataca com {ACTION}!" },
@@ -102,9 +102,9 @@ window.Actions = {
       { type: "animation", animation: "drain" },
       {
         type: "stateChange",
-        MagicDamage: 15,
+        MagicDamage: 22,
         absorbPercent: 0.5,
-        magicModifier: 0.6,
+        magicModifier: 0.9,
       },
     ],
   },
@@ -416,7 +416,7 @@ window.Actions = {
     success: [
       { type: "textMessage", text: "{CASTER} usa {ACTION}!" },
       { type: "animation", animation: "crystal" },
-      { type: "stateChange", MagicDamageX: 33, magicModifier: 0.5 },
+      { type: "stateChange", MagicDamageX: 55, magicModifier: 0.7 },
     ],
   },
   cyrstalFelicia: {
@@ -443,7 +443,7 @@ window.Actions = {
     success: [
       { type: "textMessage", text: "{CASTER} ataca com {ACTION}!" },
       { type: "animation", animation: "spin" },
-      { type: "stateChange", damage: 10, attackModifier: 0.75 },
+      { type: "stateChange", damage: 10, attackModifier: 0.85 },
     ],
   },
   ishtarDualBlade: {
@@ -453,13 +453,25 @@ window.Actions = {
     success: [
       { type: "textMessage", text: "{CASTER} ataca com {ACTION}!" },
       { type: "animation", animation: "spin" },
-      { type: "stateChange", damage: 5, attackModifier: 0.4, mpCost: 3 },
+      { type: "stateChange", damage: 9, attackModifier: 0.5, mpCost: 3 },
       {
         type: "textMessage",
         text: "{CASTER} executa o segundo golpe de {ACTION}!",
       },
       { type: "animation", animation: "spin" },
-      { type: "stateChange", damage: 15, attackModifier: 0.75, mpCost: 3 },
+      { type: "stateChange", damage: 19, attackModifier: 0.95, mpCost: 3 },
+    ],
+  },
+
+  ishtarSonicBlade: {
+    name: "Sonic Blade",
+    description: "Causa dano fisico ignorando a defesa",
+    mpCost: 19,
+    success: [
+      { type: "textMessage", text: "{CASTER} ataca com {ACTION}!" },
+      { type: "animation", animation: "spin" },
+      { type: "stateChange", damageBreak: 18, attackModifier: 0.45 },
+      { type: "textMessage", text: "{CASTER} ultrapassa os limite da velocidade ignorando a defesa de {TARGET}" },
     ],
   },
 
@@ -580,9 +592,33 @@ window.Actions = {
     success: [
       { type: "textMessage", text: "{CASTER} ataca com {ACTION}!" },
       { type: "animation", animation: "spin" },
-      { type: "stateChange", damage: 17, attackModifier: 0.55 },
+      { type: "stateChange", damage: 21, attackModifier: 0.7 },
     ],
   },
+
+  freyaRainofBlades: {
+    name: "Rain of Blades",
+    description: "Freya usa sua magia de invocação, invocando varias facas em seus alvos causando dano fisico a TODOS os inimigos",
+    mpCost: 17,
+    success: [
+      { type: "textMessage", text: "{CASTER} usa {ACTION}!" },
+      { type: "animation", animation: "arrow" },
+      { type: "stateChange", damageX: 22, attackModifier: 1.3, mpCost: 17 },
+    ],
+  },
+
+  freyaMeditate: {
+    name: "Meditate",
+    targetType: "friendly",
+    description: "Freya Medita recuperando MP de acordo com seu Magic Attack",
+    success: [
+        { type: "textMessage", text: "{CASTER} usa {ACTION}!" },
+        { type: "animation", animation: "spin" },
+        { type: "stateChange", manaRecover: 17, magicModifier: 0.3 },
+        { type: "textMessage", text: "{CASTER} recuperou Mana " },
+        
+    ]
+},
 
   freyaWater: {
     name: "Water",
@@ -591,7 +627,7 @@ window.Actions = {
     success: [
       { type: "textMessage", text: "{CASTER} usa {ACTION}!" },
       { type: "animation", animation: "water" },
-      { type: "stateChange", MagicDamage: 40, magicModifier: 0.65, mpCost: 6 },
+      { type: "stateChange", MagicDamage: 40, magicModifier: 0.77, mpCost: 6 },
     ],
   },
 
@@ -602,7 +638,7 @@ window.Actions = {
     success: [
       { type: "textMessage", text: "{CASTER} usa {ACTION}!" },
       { type: "animation", animation: "fire" },
-      { type: "stateChange", MagicDamage: 20, magicModifier: 0.9, mpCost: 7 },
+      { type: "stateChange", MagicDamage: 20, magicModifier: 0.96, mpCost: 7 },
     ],
   },
   freyaVulcan: {
@@ -612,7 +648,7 @@ window.Actions = {
     success: [
       { type: "textMessage", text: "{CASTER} usa {ACTION}!" },
       { type: "animation", animation: "vulcan" },
-      { type: "stateChange", MagicDamageX: 15, magicModifier: 0.7, mpCost: 16 },
+      { type: "stateChange", MagicDamageX: 22, magicModifier: 0.7, mpCost: 16 },
     ],
   },
   freyaFlood: {
@@ -622,7 +658,7 @@ window.Actions = {
     success: [
       { type: "textMessage", text: "{CASTER} usa {ACTION}!" },
       { type: "animation", animation: "flood" },
-      { type: "stateChange", MagicDamageX: 30, magicModifier: 0.5, mpCost: 14 },
+      { type: "stateChange", MagicDamageX: 30, magicModifier: 0.58, mpCost: 14 },
     ],
   },
 
@@ -655,6 +691,18 @@ window.Actions = {
       },
     ],
   },
+  freyaMagicZone: {
+    name: "Magic Zone",
+    description: "Aumenta a defesa magica e o ataque mágico de Freya",
+    targetType: "friendly",
+    mpCost: 22,
+    success: [
+      { type: "textMessage", text: "{CASTER} usa {ACTION}!" },
+      { type: "stateChange", status: { type: "magicBoost", expiresIn: 7, magicAttackBoost: 60,},mpCost: 11,},
+      { type: "stateChange", status: { type: "magicDefenseBoost", expiresIn: 7, magicDefenseBoost: 45,},mpCost: 11,},
+
+    ],
+  },
 
   // Celestia Moves
 
@@ -665,26 +713,26 @@ window.Actions = {
     success: [
       { type: "textMessage", text: "{CASTER} ataca com {ACTION}!" },
       { type: "animation", animation: "spin" },
-      { type: "stateChange", damage: 8, attackModifier: 0.45 },
+      { type: "stateChange", damage: 8, attackModifier: 0.5 },
       { type: "animation", animation: "sleep" },
-      { type: "stateChange", MagicDamage: 10, magicModifier: 0.4 },
+      { type: "stateChange", MagicDamage: 10, magicModifier: 0.6 },
     ],
   },
 
   celestiaSoulBreak: {
     name: "Soul Break",
     mpCost: 11,
-    description: "Causa dano magico além de causar 3% da vida do alvo",
+    description: "Causa dano magico além de causar 12% da vida atual do alvo",
     success: [
       { type: "textMessage", text: "{CASTER} ataca com {ACTION}!" },
       { type: "animation", animation: "spin" },
-      { type: "stateChange", MagicDamage: 15, magicModifier: 0.6, mpCost: 11 },
+      { type: "stateChange", MagicDamage: 19, magicModifier: 0.65, mpCost: 11 },
       {
         type: "textMessage",
-        text: "{CASTER} destroi um pedaço da alma de {TARGET} causando 5% da vida Maxima",
+        text: "{CASTER} destroi um pedaço da alma de {TARGET} causando 12% da vida atual",
       },
       { type: "animation", animation: "sleep" },
-      { type: "stateChange", healthDamage: 5 },
+      { type: "stateChange", healthDamage: 12 },
     ],
   },
 
@@ -698,7 +746,7 @@ window.Actions = {
       { type: "animation", animation: "drain" },
       {
         type: "stateChange",
-        MagicDamage: 10,
+        MagicDamage: 21,
         absorbPercent: 0.5,
         magicModifier: 0.8,
         mpCost: 7,
@@ -780,7 +828,22 @@ window.Actions = {
     success: [
       { type: "textMessage", text: "{CASTER} ataca com {ACTION}!" },
       { type: "animation", animation: "spin" },
-      { type: "stateChange", MagicDamage: 20, magicModifier: 1.1, mpCost: 4 },
+      { type: "stateChange", MagicDamage: 20, magicModifier: 0.85, mpCost: 4 },
+    ],
+  },
+
+  aerinInfusionBlade: {
+    name: "Infusion Blade",
+    mpCost: 26,
+    description: "Aerin combina sua Adaga Magica e Rapieira para um ataque duplo que ignora DEFESA MAGICA e DEFESA do alvo",
+    success: [
+      { type: "textMessage", text: "{CASTER} ataca com {ACTION}!" },
+      { type: "textMessage",text: "{CASTER} executa o golpe com a Rapier {ACTION}!",},
+      { type: "animation", animation: "spin" },
+      { type: "stateChange", damageBreak: 14, attackModifier: 0.3, mpCost: 13 },
+      { type: "textMessage",text: "{CASTER} executa o golpe com a Magic Dagger",},
+      { type: "animation", animation: "spin" },
+      { type: "stateChange", magicDamageBreak: 19, magicModifier: 0.4, mpCost: 13 },
     ],
   },
 

@@ -454,7 +454,7 @@
   }
 }
 
-/* Animação de ice-sword */
+/* Animação de bolt-sword */
 .boltSword-animation {
   position: absolute;
   width: 60px; /* Ajuste conforme necessário */
@@ -466,6 +466,28 @@
 }
 
 @keyframes boltSword-impact {
+  0% {
+    opacity: 1;
+    transform: scale(3);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(3);
+  }
+}
+
+/* Animação de Arrow */
+.arrow-animation {
+  position: absolute;
+  width: 90px; /* Ajuste conforme necessário */
+  height: 90px; /* Ajuste conforme necessário */
+  background-image: url('/image/animations/arrow.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  z-index: 10; /* Certifique-se de que a animação de fogo está acima dos sprites */
+}
+
+@keyframes arrow-impact {
   0% {
     opacity: 1;
     transform: scale(3);
@@ -497,4 +519,5 @@
   animation: waterSword-impact 1.5s forwards;
   animation: iceSword-impact 1.5s forwards;
   animation: boltSword-impact 1.5s forwards;
+  animation: arrow-impact 1.5s forwards;
 }

@@ -10,9 +10,9 @@ class Battle {
     };
 
     // Adiciona a música de fundo
-    this.backgroundMusic = new Audio('theme/Battle.mp3');
+    this.backgroundMusic = new Audio(this.enemy.music);
     this.backgroundMusic.loop = true; 
-    this.backgroundMusic.volume = 0.5;
+    this.backgroundMusic.volume = this.enemy.musicVolume || 0.1;
 
     // Hero Team
     window.playerState.lineup.forEach((id) => {

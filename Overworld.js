@@ -6,8 +6,9 @@ class Overworld {
     this.map = null;
     this.backgroundMusic = new Audio('theme/map.mp3');
     this.backgroundMusic.loop = true; // Para repetir a música em loop
-    this.backgroundMusic.volume = 0.5;
+    this.backgroundMusic.volume = 0.1;
   }
+
 
   startGameLoop() {
     const step = () => {
