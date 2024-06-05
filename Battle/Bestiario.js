@@ -424,6 +424,7 @@ window.enemies = {
       "celestiaSoulBreak",
       "celestiaBlizzard",
       "celestiaVampirism",
+      "celestiaMagicDrain",
     ],
     isPlayerControlled: true,
     statusEffects: null,

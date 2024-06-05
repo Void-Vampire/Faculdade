@@ -759,7 +759,7 @@ window.Actions = {
     description: "Troca 10% da vida maxima por 50 de Mana",
     targetType: "friendly",
     success: [
-      { type: "textMessage", text: "{CASTER} uses {ACTION}!" },
+      { type: "textMessage", text: "{CASTER} usa {ACTION}!" },
       { type: "animation", animation: "vampirism" },
       { type: "stateChange", VampirismHP: 10, VampirismMP: 50 },
       {
@@ -774,9 +774,21 @@ window.Actions = {
     description: "Causa dano Magico de gelo a um inimigo",
     mpCost: 5,
     success: [
-      { type: "textMessage", text: "{CASTER} uses {ACTION}!" },
+      { type: "textMessage", text: "{CASTER} usa {ACTION}!" },
       { type: "animation", animation: "ice" },
       { type: "stateChange", MagicDamage: 22, magicModifier: 0.95, mpCost: 5 },
+    ],
+  },
+
+  celestiaMagicDrain: {
+    name: "Magic Drain",
+    description: "Celestia rouba uma pequena quantidade de Ataque Magico do alvo para si até o FIM DA BATALHA",
+    mpCost: 50,
+    success: [
+      { type: "textMessage", text: "{CASTER} usa {ACTION}!" },
+      { type: "animation", animation: "sleep" },
+      { type: "stateChange", magicDrain: 5, magicModifier:0.05, mpCost: 50 },
+      { type: "textMessage", text: "{CASTER} roubou (5 + 5%) da magia de Celestia. De {TARGET} até o fim da batalha!" },
     ],
   },
 
@@ -802,7 +814,7 @@ window.Actions = {
     description: "Aumenta a armadura de Celestia",
     targetType: "friendly",
     success: [
-      { type: "textMessage", text: "{CASTER} uses {ACTION}!" },
+      { type: "textMessage", text: "{CASTER} usa {ACTION}!" },
       {
         type: "stateChange",
         status: { type: "armor", expiresIn: 7, armor: 60, mpCost: 10 },

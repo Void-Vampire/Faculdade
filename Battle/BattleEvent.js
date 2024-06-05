@@ -46,6 +46,7 @@ class BattleEvent {
       healthDamage,
       VampirismHP,
       VampirismMP,
+      magicDrain,
     } = this.event;
     let who = this.event.onCaster ? caster : target;
 
@@ -362,6 +363,20 @@ class BattleEvent {
             mp: newMp,
           });
         }
+      });
+    }
+
+    if (magicDrain) {
+      // Calcular a quantidade de magicDrain considerando o magicModifier
+      const drainedAmount = Math.floor(magicDrain + caster.magicAttack * (magicModifier || 0));
+      
+      // Reduzir o magicAttack do alvo
+      target.update({
+        magicAttack: target.magicAttack - drainedAmount,
+      });
+
+      caster.update({
+        magicAttack: caster.magicAttack + drainedAmount,
       });
     }
 
