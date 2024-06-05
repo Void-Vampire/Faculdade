@@ -428,67 +428,71 @@ class BattleEvent {
   async giveXp(resolve) {
     let amount = this.event.xp;
     const { combatant } = this.event;
-
+  
     while (amount > 0) {
       amount -= 1;
       combatant.xp += 1;
-
+  
       // Verificar se houve aumento de nível
       if (combatant.xp >= combatant.maxXp) {
         combatant.xp = 0;
         combatant.level += 1;
-
-        // Aumentar os status do combatente de acordo com o nível
-        if (combatant.level <= 5) {
-          combatant.maxHp = Math.floor(combatant.maxHp * 1.2);
-          combatant.maxMp = Math.floor(combatant.maxMp * 1.2);
-          combatant.attack = Math.floor(combatant.attack * 1.2);
-          combatant.defense = Math.floor(combatant.defense * 1.2);
-          combatant.magicAttack = Math.floor(combatant.magicAttack * 1.2);
-          combatant.magicDefense = Math.floor(combatant.magicDefense * 1.2);
-          combatant.maxXp = Math.floor(combatant.maxXp * 1.35);
-        } else if (combatant.level > 5 && combatant.level <= 10) {
-          combatant.maxHp = Math.floor(combatant.maxHp * 1.15);
-          combatant.maxMp = Math.floor(combatant.maxMp * 1.15);
-          combatant.attack = Math.floor(combatant.attack * 1.15);
-          combatant.defense = Math.floor(combatant.defense * 1.15);
-          combatant.magicAttack = Math.floor(combatant.magicAttack * 1.15);
-          combatant.magicDefense = Math.floor(combatant.magicDefense * 1.15);
-          combatant.maxXp = Math.floor(combatant.maxXp * 1.35);
-        } else if (combatant.level > 10 && combatant.level <= 20) {
-          combatant.maxHp = Math.floor(combatant.maxHp * 1.12);
-          combatant.maxMp = Math.floor(combatant.maxMp * 1.12);
-          combatant.attack = Math.floor(combatant.attack * 1.12);
-          combatant.defense = Math.floor(combatant.defense * 1.12);
-          combatant.magicAttack = Math.floor(combatant.magicAttack * 1.12);
-          combatant.magicDefense = Math.floor(combatant.magicDefense * 1.12);
-          combatant.maxXp = Math.floor(combatant.maxXp * 1.4);
-        } else if (combatant.level > 20 && combatant.level <= 40) {
-          combatant.maxHp = Math.floor(combatant.maxHp * 1.1);
-          combatant.maxMp = Math.floor(combatant.maxMp * 1.1);
-          combatant.attack = Math.floor(combatant.attack * 1.1);
-          combatant.defense = Math.floor(combatant.defense * 1.1);
-          combatant.magicAttack = Math.floor(combatant.magicAttack * 1.1);
-          combatant.magicDefense = Math.floor(combatant.magicDefense * 1.1);
-          combatant.maxXp = Math.floor(combatant.maxXp * 1.45);
-        } else if (combatant.level > 40) {
-          combatant.maxHp = Math.floor(combatant.maxHp * 1.05);
-          combatant.maxMp = Math.floor(combatant.maxMp * 1.05);
-          combatant.attack = Math.floor(combatant.attack * 1.05);
-          combatant.defense = Math.floor(combatant.defense * 1.05);
-          combatant.magicAttack = Math.floor(combatant.magicAttack * 1.05);
-          combatant.magicDefense = Math.floor(combatant.magicDefense * 1.05);
-          combatant.maxXp = Math.floor(combatant.maxXp * 1.5);
+  
+        // Atualizar os atributos do combatente a partir do playerState
+        const playerStateHero = window.playerState.hero[combatant.id];
+        if (playerStateHero) {
+          playerStateHero.xp = combatant.xp;
+          playerStateHero.level = combatant.level;
+  
+          // Aumentar os atributos do combatente de acordo com o nível
+          if (playerStateHero.level <= 5) {
+            playerStateHero.maxHp = Math.floor(playerStateHero.maxHp * 1.2);
+            playerStateHero.maxMp = Math.floor(playerStateHero.maxMp * 1.2);
+            playerStateHero.attack = Math.floor(playerStateHero.attack * 1.2);
+            playerStateHero.defense = Math.floor(playerStateHero.defense * 1.2);
+            playerStateHero.magicAttack = Math.floor(playerStateHero.magicAttack * 1.2);
+            playerStateHero.magicDefense = Math.floor(playerStateHero.magicDefense * 1.2);
+            playerStateHero.maxXp = Math.floor(playerStateHero.maxXp * 1.35);
+          } else if (playerStateHero.level > 5 && playerStateHero.level <= 10) {
+            playerStateHero.maxHp = Math.floor(playerStateHero.maxHp * 1.15);
+            playerStateHero.maxMp = Math.floor(playerStateHero.maxMp * 1.15);
+            playerStateHero.attack = Math.floor(playerStateHero.attack * 1.15);
+            playerStateHero.defense = Math.floor(playerStateHero.defense * 1.15);
+            playerStateHero.magicAttack = Math.floor(playerStateHero.magicAttack * 1.15);
+            playerStateHero.magicDefense = Math.floor(playerStateHero.magicDefense * 1.15);
+            playerStateHero.maxXp = Math.floor(playerStateHero.maxXp * 1.35);
+          } else if (playerStateHero.level > 10 && playerStateHero.level <= 20) {
+            playerStateHero.maxHp = Math.floor(playerStateHero.maxHp * 1.12);
+            playerStateHero.maxMp = Math.floor(playerStateHero.maxMp * 1.12);
+            playerStateHero.attack = Math.floor(playerStateHero.attack * 1.12);
+            playerStateHero.defense = Math.floor(playerStateHero.defense * 1.12);
+            playerStateHero.magicAttack = Math.floor(playerStateHero.magicAttack * 1.12);
+            playerStateHero.magicDefense = Math.floor(playerStateHero.magicDefense * 1.12);
+            playerStateHero.maxXp = Math.floor(playerStateHero.maxXp * 1.4);
+          } else if (playerStateHero.level > 20 && playerStateHero.level <= 40) {
+            playerStateHero.maxHp = Math.floor(playerStateHero.maxHp * 1.1);
+            playerStateHero.maxMp = Math.floor(playerStateHero.maxMp * 1.1);
+            playerStateHero.attack = Math.floor(playerStateHero.attack * 1.1);
+            playerStateHero.defense = Math.floor(playerStateHero.defense * 1.1);
+            playerStateHero.magicAttack = Math.floor(playerStateHero.magicAttack * 1.1);
+            playerStateHero.magicDefense = Math.floor(playerStateHero.magicDefense * 1.1);
+            playerStateHero.maxXp = Math.floor(playerStateHero.maxXp * 1.45);
+          } else if (playerStateHero.level > 40) {
+            playerStateHero.maxHp = Math.floor(playerStateHero.maxHp * 1.05);
+            playerStateHero.maxMp = Math.floor(playerStateHero.maxMp * 1.05);
+            playerStateHero.attack = Math.floor(playerStateHero.attack * 1.05);
+            playerStateHero.defense = Math.floor(playerStateHero.defense * 1.05);
+            playerStateHero.magicAttack = Math.floor(playerStateHero.magicAttack * 1.05);
+            playerStateHero.magicDefense = Math.floor(playerStateHero.magicDefense * 1.05);
+            playerStateHero.maxXp = Math.floor(playerStateHero.maxXp * 1.5);
+          }
+          // Recuperar completamente os pontos de vida e pontos de magia após o aumento de nível
+          playerStateHero.hp = playerStateHero.maxHp;
+          playerStateHero.mp = playerStateHero.maxMp;
         }
-        // Recuperar completamente os pontos de vida e pontos de magia após o aumento de nível
-        combatant.hp = combatant.maxHp;
-        combatant.mp = combatant.maxMp;
       }
-
-      combatant.update();
-      playerState.hero[combatant.id] = { ...combatant };
     }
-
+  
     resolve();
   }
 

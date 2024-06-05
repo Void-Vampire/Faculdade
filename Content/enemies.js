@@ -1,5 +1,5 @@
 window.Enemies = {
-  /*
+  
   teste: {
     // 310 de EXP, 77 EXP para cada Heroi
     name: "teste",
@@ -8,11 +8,10 @@ window.Enemies = {
         id: "greenOrb1",
         ...window.enemies.s010,
         name: "Green Orb",
-        defense: 5000,
       },
   },
 },
-*/
+
   Forest1: {
     // 310 de EXP, 77 EXP para cada Heroi
     name: "Forest1",

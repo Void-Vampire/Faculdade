@@ -80,7 +80,7 @@ class Battle {
           battleEvent.init(resolve);
         });
       },
-      onWinner: (winner) => {
+      onWinner: async (winner) => {
         console.log("Winner is:", winner);
 
         // Pausa a música de fundo ao fim da batalha
@@ -104,6 +104,7 @@ class Battle {
           playerState.items = playerState.items.filter((item) => {
             return !this.usedInstanceIds[item.instanceId];
           });
+
         }
 
         this.element.remove();
