@@ -8,6 +8,9 @@ window.Enemies = {
         id: "greenOrb1",
         ...window.enemies.s010,
         name: "Green Orb",
+        hp : 1,
+        xp: 3000,
+
       },
   },
 },

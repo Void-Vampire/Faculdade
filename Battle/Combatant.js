@@ -22,6 +22,14 @@ class Combatant {
     return this.xp;
   }
 
+  restoreOriginalAttributes() {
+    // Restaurar os atributos para os valores originais
+    this.attack = this.originalAttack;
+    this.defense = this.originalDefense;
+    this.magicAttack = this.originalMagicAttack;
+    this.magicDefense = this.originalMagicDefense;
+  }
+
   createElement() {
     this.hudElement = document.createElement("div");
     this.hudElement.classList.add("Combatant");

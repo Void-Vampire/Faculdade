@@ -100,11 +100,14 @@ class TurnCycle {
 
       const winner = this.getWinningTeam();
       if (winner) {
+        Object.values(this.battle.combatants).forEach((combatant) => {
+          combatant.restoreOriginalAttributes();
+        });
+        await this.distributeEnemyXP();
         await this.onNewEvent({
           type: "textMessage",
           text: winner === "hero" ? "Vitória!" : "Derrota!",
         });
-        this.distributeEnemyXP();
         this.onWinner(winner); // Chama o manipulador de evento para informar o vencedor
         return; 
       }

@@ -4,6 +4,7 @@ class PlayerState {
       hero1: {
         id: "hero1",
         ...enemies.hero1,
+        mp:40,
       },
       hero2: {
         id: "hero2",
@@ -18,7 +19,7 @@ class PlayerState {
         ...enemies.hero4,
       },
     };
-    this.lineup = ["hero1"];
+    this.lineup = ["hero1","hero2","hero3","hero4"];
     this.items = [
       { actionId: "Potion1", instanceId: "item1" },
       { actionId: "Potion1", instanceId: "item2" },

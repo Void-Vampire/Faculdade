@@ -550,6 +550,8 @@ window.Actions = {
     targetType: "friendly",
     success: [
       { type: "textMessage", text: "{CASTER} usa {ACTION}!" },
+      { type: "stateChange", recover: 130 },
+      { type: "textMessage", text: "{CASTER} recupera 130 de HP" },
       {
         type: "stateChange",
         status: { type: "armor", expiresIn: 7, armor: 30, mpCost: 40 },
@@ -558,8 +560,6 @@ window.Actions = {
         type: "stateChange",
         status: { type: "attackBoost", expiresIn: 7, attackBoost: 30 },
       },
-      { type: "stateChange", recover: 130 },
-      { type: "textMessage", text: "{CASTER} recupera 130 de HP" },
     ],
   },
 
@@ -570,6 +570,8 @@ window.Actions = {
     mpCost: 70,
     targetType: "friendly",
     success: [
+      { type: "stateChange", recover: 400 },
+      { type: "textMessage", text: "{CASTER} recupera 400 de HP" },
       { type: "textMessage", text: "{CASTER} usa {ACTION}!" },
       {
         type: "stateChange",
@@ -579,8 +581,7 @@ window.Actions = {
         type: "stateChange",
         status: { type: "attackBoost", expiresIn: 7, attackBoost: 75 },
       },
-      { type: "stateChange", recover: 400 },
-      { type: "textMessage", text: "{CASTER} recupera 400 de HP" },
+
     ],
   },
 
