@@ -4,7 +4,6 @@ class PlayerState {
       hero1: {
         id: "hero1",
         ...enemies.hero1,
-        mp:40,
       },
       hero2: {
         id: "hero2",

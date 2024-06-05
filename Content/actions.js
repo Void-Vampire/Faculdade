@@ -9,7 +9,7 @@ window.Actions = {
     success: [
       { type: "textMessage", text: "{CASTER} ataca com {ACTION}!" },
       { type: "animation", animation: "spin" },
-      { type: "stateChange", damage: 38, attackModifier: 0.85 },
+      { type: "stateChange", damage: 77, attackModifier: 0.85 },
     ],
   },
   axe: {
@@ -18,7 +18,7 @@ window.Actions = {
     success: [
       { type: "textMessage", text: "{CASTER} ataca com {ACTION}!" },
       { type: "animation", animation: "spin" },
-      { type: "stateChange", damage: 33, attackModifier: 0.9 },
+      { type: "stateChange", damage: 50, attackModifier: 0.9 },
     ],
   },
   powerAxe: {
@@ -27,7 +27,7 @@ window.Actions = {
     success: [
       { type: "textMessage", text: "{CASTER} ataca com {ACTION}!" },
       { type: "animation", animation: "spin" },
-      { type: "stateChange", damageX: 21, attackModifier: 0.4 },
+      { type: "stateChange", damageX: 44, attackModifier: 0.4 },
     ],
   },
   skeletonSword: {
@@ -45,7 +45,7 @@ window.Actions = {
     success: [
       { type: "textMessage", text: "{CASTER} ataca com {ACTION}!" },
       { type: "animation", animation: "spin" },
-      { type: "stateChange", damage: 17, attackModifier: 0.9 },
+      { type: "stateChange", damage: 14, attackModifier: 0.9 },
     ],
   },
   bite: {
@@ -54,7 +54,7 @@ window.Actions = {
     success: [
       { type: "textMessage", text: "{CASTER} ataca com {ACTION}!" },
       { type: "animation", animation: "spin" },
-      { type: "stateChange", damage: 20, attackModifier: 0.8 },
+      { type: "stateChange", damage: 16, attackModifier: 0.8 },
     ],
   },
   scissor: {
@@ -63,7 +63,7 @@ window.Actions = {
     success: [
       { type: "textMessage", text: "{CASTER} ataca com {ACTION}!" },
       { type: "animation", animation: "spin" },
-      { type: "stateChange", damage: 26, attackModifier: 0.85 },
+      { type: "stateChange", damage: 23, attackModifier: 0.85 },
     ],
   },
   poisonBite: {
@@ -72,12 +72,12 @@ window.Actions = {
     success: [
       { type: "textMessage", text: "{CASTER} ataca com {ACTION}!" },
       { type: "animation", animation: "spin" },
-      { type: "stateChange", damage: 10, attackModifier: 0.5 },
+      { type: "stateChange", damage: 40, attackModifier: 0.5 },
       {
         type: "textMessage",
-        text: "Além do dano da mordida, Veneno causa 10% da vida de {TARGET}",
+        text: "Além do dano da mordida, Veneno causa 20% da vida de {TARGET}",
       },
-      { type: "stateChange", healthDamage: 10 },
+      { type: "stateChange", healthDamage: 20 },
     ],
   },
   poisonBite2: {
@@ -86,12 +86,12 @@ window.Actions = {
     success: [
       { type: "textMessage", text: "{CASTER} ataca com {ACTION}!" },
       { type: "animation", animation: "spin" },
-      { type: "stateChange", damage: 45, attackModifier: 0.5 },
+      { type: "stateChange", damage: 60, attackModifier: 0.5 },
       {
         type: "textMessage",
-        text: "Além do dano da mordida, Veneno causa 25% da vida de {TARGET}",
+        text: "Além do dano da mordida, Veneno causa 30% da vida de {TARGET}",
       },
-      { type: "stateChange", healthDamage: 25 },
+      { type: "stateChange", healthDamage: 30 },
     ],
   },
   absorbBat: {
@@ -166,7 +166,7 @@ window.Actions = {
     success: [
       { type: "textMessage", text: "{CASTER} ataca com {ACTION}!" },
       { type: "animation", animation: "spin" },
-      { type: "stateChange", damage: 40, attackModifier: 1.0 },
+      { type: "stateChange", damage: 60, attackModifier: 1.0 },
     ],
   },
   chargeLance: {
@@ -175,7 +175,7 @@ window.Actions = {
     success: [
       { type: "textMessage", text: "{CASTER} ataca com {ACTION}!" },
       { type: "animation", animation: "spin" },
-      { type: "stateChange", damageX: 30, attackModifier: 0.6 },
+      { type: "stateChange", damageX: 40, attackModifier: 0.6 },
     ],
   },
   blackShield: {
@@ -199,7 +199,7 @@ window.Actions = {
     success: [
       { type: "textMessage", text: "{CASTER} ataca com {ACTION}!" },
       { type: "animation", animation: "spin" },
-      { type: "stateChange", damage: 50, attackModifier: 1.0 },
+      { type: "stateChange", damage: 55, attackModifier: 1.0 },
     ],
   },
   bloodHalberd: {
@@ -469,9 +469,9 @@ window.Actions = {
     mpCost: 19,
     success: [
       { type: "textMessage", text: "{CASTER} ataca com {ACTION}!" },
+      { type: "textMessage", text: "{CASTER} ultrapassa os limite da velocidade ignorando a defesa de {TARGET}" },
       { type: "animation", animation: "spin" },
       { type: "stateChange", damageBreak: 18, attackModifier: 0.45 },
-      { type: "textMessage", text: "{CASTER} ultrapassa os limite da velocidade ignorando a defesa de {TARGET}" },
     ],
   },
 
@@ -714,9 +714,9 @@ window.Actions = {
     success: [
       { type: "textMessage", text: "{CASTER} ataca com {ACTION}!" },
       { type: "animation", animation: "spin" },
-      { type: "stateChange", damage: 8, attackModifier: 0.5 },
+      { type: "stateChange", damage: 14, attackModifier: 0.5 },
       { type: "animation", animation: "sleep" },
-      { type: "stateChange", MagicDamage: 10, magicModifier: 0.6 },
+      { type: "stateChange", MagicDamage: 16, magicModifier: 0.6 },
     ],
   },
 
