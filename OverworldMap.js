@@ -578,7 +578,7 @@ window.OverworldMaps = {
         },
       ],
     },
-    
+    /*
     encounterZones: {
       [utils.asGridCoord(9, 13)]: [
         {
@@ -586,7 +586,7 @@ window.OverworldMaps = {
         },
       ],
     }
-    
+    */
   },
   Forest2: {
     id: "Forest2",
