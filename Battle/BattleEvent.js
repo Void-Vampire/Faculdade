@@ -440,37 +440,37 @@ class BattleEvent {
 
         // Aumentar os status do combatente de acordo com o nível
         if (combatant.level <= 5) {
-          combatant.maxHp = Math.floor(combatant.maxHp * 1.2);
-          combatant.maxMp = Math.floor(combatant.maxMp * 1.2);
-          combatant.attack = Math.floor(combatant.attack * 1.2);
-          combatant.defense = Math.floor(combatant.defense * 1.2);
-          combatant.magicAttack = Math.floor(combatant.magicAttack * 1.2);
-          combatant.magicDefense = Math.floor(combatant.magicDefense * 1.2);
-          combatant.maxXp = Math.floor(combatant.maxXp * 1.35);
-        } else if (combatant.level > 5 && combatant.level <= 10) {
           combatant.maxHp = Math.floor(combatant.maxHp * 1.15);
           combatant.maxMp = Math.floor(combatant.maxMp * 1.15);
           combatant.attack = Math.floor(combatant.attack * 1.15);
           combatant.defense = Math.floor(combatant.defense * 1.15);
           combatant.magicAttack = Math.floor(combatant.magicAttack * 1.15);
           combatant.magicDefense = Math.floor(combatant.magicDefense * 1.15);
-          combatant.maxXp = Math.floor(combatant.maxXp * 1.35);
+          combatant.maxXp = Math.floor(combatant.maxXp * 1.30);
+        } else if (combatant.level > 5 && combatant.level <= 10) {
+          combatant.maxHp = Math.floor(combatant.maxHp * 1.10);
+          combatant.maxMp = Math.floor(combatant.maxMp * 1.10);
+          combatant.attack = Math.floor(combatant.attack * 1.10);
+          combatant.defense = Math.floor(combatant.defense * 1.10);
+          combatant.magicAttack = Math.floor(combatant.magicAttack * 1.10);
+          combatant.magicDefense = Math.floor(combatant.magicDefense * 1.10);
+          combatant.maxXp = Math.floor(combatant.maxXp * 1.32);
         } else if (combatant.level > 10 && combatant.level <= 20) {
-          combatant.maxHp = Math.floor(combatant.maxHp * 1.12);
-          combatant.maxMp = Math.floor(combatant.maxMp * 1.12);
-          combatant.attack = Math.floor(combatant.attack * 1.12);
-          combatant.defense = Math.floor(combatant.defense * 1.12);
-          combatant.magicAttack = Math.floor(combatant.magicAttack * 1.12);
-          combatant.magicDefense = Math.floor(combatant.magicDefense * 1.12);
-          combatant.maxXp = Math.floor(combatant.maxXp * 1.4);
+          combatant.maxHp = Math.floor(combatant.maxHp * 1.08);
+          combatant.maxMp = Math.floor(combatant.maxMp * 1.08);
+          combatant.attack = Math.floor(combatant.attack * 1.08);
+          combatant.defense = Math.floor(combatant.defense * 1.08);
+          combatant.magicAttack = Math.floor(combatant.magicAttack * 1.08);
+          combatant.magicDefense = Math.floor(combatant.magicDefense * 1.08);
+          combatant.maxXp = Math.floor(combatant.maxXp * 1.35);
         } else if (combatant.level > 20 && combatant.level <= 40) {
-          combatant.maxHp = Math.floor(combatant.maxHp * 1.1);
-          combatant.maxMp = Math.floor(combatant.maxMp * 1.1);
-          combatant.attack = Math.floor(combatant.attack * 1.1);
-          combatant.defense = Math.floor(combatant.defense * 1.1);
-          combatant.magicAttack = Math.floor(combatant.magicAttack * 1.1);
-          combatant.magicDefense = Math.floor(combatant.magicDefense * 1.1);
-          combatant.maxXp = Math.floor(combatant.maxXp * 1.45);
+          combatant.maxHp = Math.floor(combatant.maxHp * 1.06);
+          combatant.maxMp = Math.floor(combatant.maxMp * 1.06);
+          combatant.attack = Math.floor(combatant.attack * 1.06);
+          combatant.defense = Math.floor(combatant.defense * 1.06);
+          combatant.magicAttack = Math.floor(combatant.magicAttack * 1.06);
+          combatant.magicDefense = Math.floor(combatant.magicDefense * 1.06);
+          combatant.maxXp = Math.floor(combatant.maxXp * 1.40);
         } else if (combatant.level > 40) {
           combatant.maxHp = Math.floor(combatant.maxHp * 1.05);
           combatant.maxMp = Math.floor(combatant.maxMp * 1.05);
@@ -478,7 +478,7 @@ class BattleEvent {
           combatant.defense = Math.floor(combatant.defense * 1.05);
           combatant.magicAttack = Math.floor(combatant.magicAttack * 1.05);
           combatant.magicDefense = Math.floor(combatant.magicDefense * 1.05);
-          combatant.maxXp = Math.floor(combatant.maxXp * 1.5);
+          combatant.maxXp = Math.floor(combatant.maxXp * 1.45);
         }
         // Recuperar completamente os pontos de vida e pontos de magia após o aumento de nível
         combatant.hp = combatant.maxHp;
