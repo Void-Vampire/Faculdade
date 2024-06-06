@@ -471,7 +471,7 @@ window.Actions = {
       { type: "textMessage", text: "{CASTER} ataca com {ACTION}!" },
       { type: "textMessage", text: "{CASTER} ultrapassa os limite da velocidade ignorando a defesa de {TARGET}" },
       { type: "animation", animation: "spin" },
-      { type: "stateChange", damageBreak: 18, attackModifier: 0.45 },
+      { type: "stateChange", damageBreak: 18, attackModifier: 0.45, mpCost: 19 },
     ],
   },
 
@@ -615,7 +615,7 @@ window.Actions = {
     success: [
         { type: "textMessage", text: "{CASTER} usa {ACTION}!" },
         { type: "animation", animation: "spin" },
-        { type: "stateChange", manaRecover: 17, magicModifier: 0.3 },
+        { type: "stateChange", manaRecover: 7, magicModifier: 0.3 },
         { type: "textMessage", text: "{CASTER} recuperou Mana " },
         
     ]
