@@ -25,7 +25,7 @@ class SubmissionMenu {
   getPages() {
     const backOption = {
       label: "Go Back",
-      description: "Return to previous page",
+      description: "Volte para a pagina anterior",
       handler: () => {
         this.keyboardMenu.setOptions(this.getPages().root);
       },
@@ -35,7 +35,7 @@ class SubmissionMenu {
       root: [
         {
           label: "Fight",
-          description: "Attack",
+          description: "Aba de Ataques",
           handler: () => {
             // Ataque Normal
             this.keyboardMenu.setOptions(this.getPages().fight);
@@ -43,7 +43,7 @@ class SubmissionMenu {
         },
         {
           label: "Magic",
-          description: "Uses Magic",
+          description: "Aba de Magias",
           handler: () => {
             // Vá para a pagina de magias
             this.keyboardMenu.setOptions(this.getPages().magics);
@@ -51,7 +51,7 @@ class SubmissionMenu {
         },
         {
           label: "Items",
-          description: "Uses Item",
+          description: "Aba de Items",
           handler: () => {
             // Vá para a pagina de items
             this.keyboardMenu.setOptions(this.getPages().items);

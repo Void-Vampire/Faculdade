@@ -22,7 +22,7 @@ class PauseMenu {
               ...lineupHeroes,
                 {
                   label: "Save",
-                  description: "Save your progress",
+                  description: "Salve seu Progresso",
                   handler: () => {
                     this.progress.save();
                     this.close();
@@ -30,7 +30,7 @@ class PauseMenu {
                 },
                 {
                   label: "Close",
-                  description: "Close the pause menu",
+                  description: "Feche o Menu de Pausa",
                   handler: () => {
                     this.close();
                   }
@@ -50,7 +50,7 @@ class PauseMenu {
       },
       {
         label: "Back",
-        description: "Back to root menu",
+        description: "Volte ao Menu Principal",
         handler: () => {
           this.keyboardMenu.setOptions( this.getOptions("root") );
         }

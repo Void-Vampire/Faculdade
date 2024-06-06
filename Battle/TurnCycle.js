@@ -152,7 +152,7 @@ class TurnCycle {
         // Mostrar a mensagem de quanto de exp o personagem ganhou
         await this.onNewEvent({
           type: "textMessage",
-          text: `${c.name} gained ${xpPerHero} XP!`
+          text: `${c.name} ganhou ${xpPerHero} XP!`
         });
       }
     }
