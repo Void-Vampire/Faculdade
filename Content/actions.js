@@ -665,7 +665,7 @@ window.Actions = {
 
   freyaHeal: {
     name: "Heal",
-    mpCost: 18,
+    mpCost: 23,
     description: "Recupera pouca vida de todos os aliados",
     targetType: "friendly",
     success: [
@@ -680,7 +680,7 @@ window.Actions = {
 
   freyaHeal2: {
     name: "Heal 2",
-    mpCost: 33,
+    mpCost: 50,
     description: "Recupera vida de todos os aliados",
     targetType: "friendly",
     success: [
