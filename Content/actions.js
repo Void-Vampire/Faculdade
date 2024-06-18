@@ -485,8 +485,8 @@ window.Actions = {
       { type: "animation", animation: "fireSword" },
       {
         type: "stateChange",
-        MagicDamage: 12,
-        damage: 18,
+        magic: 12,
+        physical: 18,
         attackModifier: 0.8,
         magicModifier: 0.7,
         mpCost: 10,
@@ -649,7 +649,7 @@ window.Actions = {
     success: [
       { type: "textMessage", text: "{CASTER} usa {ACTION}!" },
       { type: "animation", animation: "vulcan" },
-      { type: "stateChange", MagicDamageX: 22, magicModifier: 0.7, mpCost: 16 },
+      { type: "stateChange", MagicDamageX: 14, magicModifier: 0.7, mpCost: 16 },
     ],
   },
   freyaFlood: {
@@ -670,7 +670,7 @@ window.Actions = {
     targetType: "friendly",
     success: [
       { type: "textMessage", text: "{CASTER} uses a {ACTION}!" },
-      { type: "stateChange", RecoverX: 50, magicModifier: 0.6, mpCost: 18 },
+      { type: "stateChange", RecoverX: 50, magicModifier: 0.6, mpCost: 23 },
       {
         type: "textMessage",
         text: "Todos os membros da equipe recuperaram um pouco de vida!",
@@ -685,7 +685,7 @@ window.Actions = {
     targetType: "friendly",
     success: [
       { type: "textMessage", text: "{CASTER} uses a {ACTION}!" },
-      { type: "stateChange", RecoverX: 140, magicModifier: 0.85, mpCost: 33 },
+      { type: "stateChange", RecoverX: 140, magicModifier: 0.85, mpCost: 50 },
       {
         type: "textMessage",
         text: "Todos os membros da equipe recuperaram vida!",
@@ -810,14 +810,14 @@ window.Actions = {
 
   celestiaShield: {
     name: "Shield",
-    mpCost: 10,
+    mpCost: 25,
     description: "Aumenta a armadura de Celestia",
     targetType: "friendly",
     success: [
       { type: "textMessage", text: "{CASTER} usa {ACTION}!" },
       {
         type: "stateChange",
-        status: { type: "armor", expiresIn: 7, armor: 60, mpCost: 10 },
+        status: { type: "armor", expiresIn: 7, armor: 60, mpCost: 25 },
       },
     ],
   },
@@ -847,16 +847,16 @@ window.Actions = {
 
   aerinInfusionBlade: {
     name: "Infusion Blade",
-    mpCost: 26,
+    mpCost: 28,
     description: "Aerin combina sua Adaga Magica e Rapieira para um ataque duplo que ignora DEFESA MAGICA e DEFESA do alvo",
     success: [
       { type: "textMessage", text: "{CASTER} ataca com {ACTION}!" },
       { type: "textMessage",text: "{CASTER} executa o golpe com a Rapier {ACTION}!",},
       { type: "animation", animation: "spin" },
-      { type: "stateChange", damageBreak: 14, attackModifier: 0.3, mpCost: 13 },
+      { type: "stateChange", damageBreak: 14, attackModifier: 0.3, mpCost: 14 },
       { type: "textMessage",text: "{CASTER} executa o golpe com a Magic Dagger",},
       { type: "animation", animation: "spin" },
-      { type: "stateChange", magicDamageBreak: 19, magicModifier: 0.4, mpCost: 13 },
+      { type: "stateChange", magicDamageBreak: 19, magicModifier: 0.4, mpCost: 14 },
     ],
   },
 
@@ -872,8 +872,8 @@ window.Actions = {
       { type: "animation", animation: "fireSword" },
       {
         type: "stateChange",
-        MagicDamage: 20,
-        damage: 25,
+        magic: 20,
+        physical: 25,
         attackModifier: 0.5,
         magicModifier: 0.6,
         mpCost: 40,
@@ -883,8 +883,8 @@ window.Actions = {
       { type: "animation", animation: "waterSword" },
       {
         type: "stateChange",
-        MagicDamage: 32,
-        damage: 31,
+        magic: 32,
+        physical: 31,
         attackModifier: 0.6,
         magicModifier: 0.75,
         mpCost: 40,
@@ -894,8 +894,8 @@ window.Actions = {
       { type: "animation", animation: "iceSword" },
       {
         type: "stateChange",
-        MagicDamage: 40,
-        damage: 42,
+        magic: 40,
+        physical: 42,
         attackModifier: 0.8,
         magicModifier: 0.9,
         mpCost: 40,
@@ -905,8 +905,8 @@ window.Actions = {
       { type: "animation", animation: "boltSword" },
       {
         type: "stateChange",
-        MagicDamage: 55,
-        damage: 60,
+        magic: 55,
+        physical: 60,
         attackModifier: 1.0,
         magicModifier: 1.2,
         mpCost: 30,

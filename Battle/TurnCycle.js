@@ -54,6 +54,7 @@ class TurnCycle {
           caster,
           target: submission.target,
         };
+
         await this.onNewEvent(event);
       }
 

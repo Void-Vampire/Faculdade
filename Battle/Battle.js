@@ -81,7 +81,6 @@ class Battle {
         });
       },
       onWinner: async (winner) => {
-        console.log("Winner is:", winner);
 
         // Pausa a música de fundo ao fim da batalha
         this.backgroundMusic.pause();

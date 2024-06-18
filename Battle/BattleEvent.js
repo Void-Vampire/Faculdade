@@ -22,6 +22,8 @@ class BattleEvent {
     const {
       caster,
       target,
+      physical,
+      magic,
       damage,
       damageBreak,
       damageX,
@@ -61,11 +63,48 @@ class BattleEvent {
 
     let affectedMembers = [];
 
+    if (physical && magic) {
+
+    let effectiveDamage = physical + caster.attack * (attackModifier || 0);
+    effectiveDamage = Math.max(effectiveDamage - target.defense, 1);
+    effectiveDamage = Math.floor(effectiveDamage);
+
+    // Calcular o dano mágico efetivo
+    let effectiveMagicDamage = magic + caster.magicAttack * (magicModifier || 0);
+    effectiveMagicDamage = Math.max(effectiveMagicDamage - target.magicDefense, 1);
+    effectiveMagicDamage = Math.floor(effectiveMagicDamage);
+
+    const totalDamage = effectiveDamage + effectiveMagicDamage;
+
+   // Aplicar o dano total ao alvo
+    target.update({
+    hp: target.hp - totalDamage,
+     });
+
+    // Iniciar animação de dano
+    this.showDamage(totalDamage, target.spriteElement);
+    target.spriteElement.classList.add("battle-damage-blink");
+
+    // Exibir número de dano total
+    this.showDamage(totalDamage, target.spriteElement);
+
+    // Verificar se o alvo foi derrotado
+    if (target.hp <= 0) {
+    // Remover o elemento do sprite do DOM
+    target.spriteElement.remove();
+    target.hudElement.remove();
+  }
+  affectedMembers.push(target);
+    }
+
     if (healthDamage) {
       let damageAmount = Math.floor(target.hp * (healthDamage / 100));
+
       target.update({
         hp: target.hp - damageAmount,
       });
+
+      this.showDamage(damageAmount, target.spriteElement);
 
       // Verificar se o alvo foi derrotado
       if (target.hp <= 0) {
@@ -91,6 +130,8 @@ class BattleEvent {
       caster.update({
         hp: newHp,
       });
+
+      this.showDamage(berserkDamage, caster.spriteElement);
     }
 
     if (damage) {
@@ -106,17 +147,15 @@ class BattleEvent {
         hp: target.hp - effectiveDamage,
       });
 
-      // Iniciar animação de dano
+      target.spriteElement.classList.add("battle-damage-blink");
+      this.showDamage(effectiveDamage, target.spriteElement);
+
       if (target.hp <= 0) {
         // Remover o elemento do sprite do DOM
         target.spriteElement.remove();
         target.hudElement.remove();
-      } else {
-        // Iniciar animação de dano
-        target.spriteElement.classList.add("battle-damage-blink");
-
-        affectedMembers.push(target);
       }
+        affectedMembers.push(target);
     }
 
     if (damageBreak) {
@@ -131,17 +170,15 @@ class BattleEvent {
           hp: target.hp - effectiveDamage,
       });
 
-      // Iniciar animação de dano
+      target.spriteElement.classList.add("battle-damage-blink");
+      this.showDamage(effectiveDamage, target.spriteElement);
+
       if (target.hp <= 0) {
           // Remover o elemento do sprite do DOM
           target.spriteElement.remove();
           target.hudElement.remove();
-      } else {
-          // Iniciar animação de dano
-          target.spriteElement.classList.add("battle-damage-blink");
-
+      } 
           affectedMembers.push(target);
-      }
   }
 
     if (damageX) {
@@ -165,14 +202,14 @@ class BattleEvent {
             hp: newHp,
           });
 
+          this.showDamage(effectiveDamageX, member.spriteElement);
+          member.spriteElement.classList.add("battle-damage-blink");
           affectedMembers.push(member);
 
           if (member.hp <= 0) {
             member.spriteElement.remove();
             member.hudElement.remove();
-          } else {
-            member.spriteElement.classList.add("battle-damage-blink");
-          }
+          } 
         }
       });
     }
@@ -192,6 +229,9 @@ class BattleEvent {
         hp: target.hp - effectiveMagicDamage,
       });
 
+      this.showDamage(effectiveMagicDamage, target.spriteElement);
+      target.spriteElement.classList.add("battle-damage-blink");
+
       // Curar o atacante se houver absorbPercent
       if (absorbPercent) {
         let absorbAmount = Math.floor(effectiveMagicDamage * absorbPercent);
@@ -207,12 +247,9 @@ class BattleEvent {
         // Remover o elemento do sprite do DOM
         target.spriteElement.remove();
         target.hudElement.remove();
-      } else {
-        // Iniciar animação de dano
-        target.spriteElement.classList.add("battle-damage-blink");
-
+      } 
         affectedMembers.push(target);
-      }
+      
     }
 
     if (magicDamageBreak) {
@@ -227,17 +264,15 @@ class BattleEvent {
           hp: target.hp - effectiveMagicDamage,
       });
 
-      // Iniciar animação de dano
+      this.showDamage(effectiveMagicDamage, target.spriteElement);
+      target.spriteElement.classList.add("battle-damage-blink");
+      
       if (target.hp <= 0) {
-          // Remover o elemento do sprite do DOM
+          
           target.spriteElement.remove();
           target.hudElement.remove();
-      } else {
-          // Iniciar animação de dano
-          target.spriteElement.classList.add("battle-damage-blink");
-
-          affectedMembers.push(target);
-      }
+      } 
+          affectedMembers.push(target);   
   }
 
     if (MagicDamageX) {
@@ -265,14 +300,15 @@ class BattleEvent {
             hp: newHp,
           });
 
+          this.showDamage(effectiveMagicDamageX, member.spriteElement);
+          member.spriteElement.classList.add("battle-damage-blink");
+
           affectedMembers.push(member);
 
           if (member.hp <= 0) {
             member.spriteElement.remove();
             member.hudElement.remove();
-          } else {
-            member.spriteElement.classList.add("battle-damage-blink");
-          }
+          } 
         }
       });
     }
@@ -308,6 +344,8 @@ class BattleEvent {
       caster.update({
         hp: newHp,
       });
+
+      this.showDamage(hpToSacrifice, caster.spriteElement);
     
       // Recuperar o MP definido em VampirismMP
       const newMp = caster.mp + mpRecovered;
@@ -324,7 +362,6 @@ class BattleEvent {
           let recoverAmount = Math.floor(
             RecoverX + caster.magicAttack * (magicModifier || 0)
           );
-          console.log(recoverAmount);
           let newHp = member.hp + recoverAmount;
           if (newHp > member.maxHp) {
             newHp = member.maxHp;
@@ -510,6 +547,26 @@ class BattleEvent {
   animation(resolve) {
     const fn = BattleAnimations[this.event.animation];
     fn(this.event, resolve);
+  }
+
+  showDamage(damage, targetElement) {
+    // Crie um novo elemento para o número de dano
+    const damageNumber = document.createElement('div');
+    damageNumber.classList.add('damage-number');
+    damageNumber.textContent = damage;
+    
+    // Posicione o elemento de dano acima do sprite do alvo
+    const targetRect = targetElement.getBoundingClientRect();
+    damageNumber.style.top = `${targetRect.top}px`;
+    damageNumber.style.left = `${targetRect.left}px`;
+    
+    // Adicione o elemento ao DOM
+    document.body.appendChild(damageNumber);
+    
+    // Remova o elemento após um período de tempo
+    setTimeout(() => {
+      damageNumber.remove();
+  }, 3000); // Tempo de exibição do número de dano (3 segundos)
   }
 
   init(resolve) {
