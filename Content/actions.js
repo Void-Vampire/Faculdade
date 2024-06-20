@@ -166,7 +166,7 @@ window.Actions = {
     success: [
       { type: "textMessage", text: "{CASTER} ataca com {ACTION}!" },
       { type: "animation", animation: "spin" },
-      { type: "stateChange", damage: 60, attackModifier: 1.0 },
+      { type: "stateChange", damage: 40, attackModifier: 1.0 },
     ],
   },
   chargeLance: {
@@ -175,7 +175,7 @@ window.Actions = {
     success: [
       { type: "textMessage", text: "{CASTER} ataca com {ACTION}!" },
       { type: "animation", animation: "spin" },
-      { type: "stateChange", damageX: 40, attackModifier: 0.6 },
+      { type: "stateChange", damageX: 25, attackModifier: 0.6 },
     ],
   },
   blackShield: {
@@ -199,7 +199,7 @@ window.Actions = {
     success: [
       { type: "textMessage", text: "{CASTER} ataca com {ACTION}!" },
       { type: "animation", animation: "spin" },
-      { type: "stateChange", damage: 55, attackModifier: 1.0 },
+      { type: "stateChange", damage: 40, attackModifier: 1.0 },
     ],
   },
   bloodHalberd: {
@@ -228,7 +228,7 @@ window.Actions = {
     success: [
       { type: "textMessage", text: "{CASTER} ataca com {ACTION}!" },
       { type: "animation", animation: "spin" },
-      { type: "stateChange", damage: 60, attackModifier: 1.0 },
+      { type: "stateChange", damage: 50, attackModifier: 1.0 },
     ],
   },
   soulDestruction: {
@@ -615,7 +615,7 @@ window.Actions = {
     success: [
         { type: "textMessage", text: "{CASTER} usa {ACTION}!" },
         { type: "animation", animation: "spin" },
-        { type: "stateChange", manaRecover: 7, magicModifier: 0.3 },
+        { type: "stateChange", manaRecover: 7, magicModifier: 0.05 },
         { type: "textMessage", text: "{CASTER} recuperou Mana " },
         
     ]
@@ -830,7 +830,7 @@ window.Actions = {
     success: [
       { type: "textMessage", text: "{CASTER} ataca com {ACTION}!" },
       { type: "animation", animation: "spin" },
-      { type: "stateChange", damage: 18, attackModifier: 0.6 },
+      { type: "stateChange", damage: 18, attackModifier: 0.7 },
     ],
   },
 

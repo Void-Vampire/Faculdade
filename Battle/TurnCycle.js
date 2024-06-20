@@ -104,6 +104,9 @@ class TurnCycle {
         Object.values(this.battle.combatants).forEach((combatant) => {
           combatant.restoreOriginalAttributes();
         });
+        if (winner !== "hero") {
+          this.totalEnemyXP = 0;
+        }
         await this.distributeEnemyXP();
         await this.onNewEvent({
           type: "textMessage",

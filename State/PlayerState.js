@@ -4,18 +4,22 @@ class PlayerState {
       hero1: {
         id: "hero1",
         ...enemies.hero1,
+        weapon: null,
       },
       hero2: {
         id: "hero2",
         ...enemies.hero2,
+        weapon: null,
       },
       hero3: {
         id: "hero3",
         ...enemies.hero3,
+        weapon: null,
       },
       hero4: {
         id: "hero4",
         ...enemies.hero4,
+        weapon: null,
       },
     };
     this.lineup = ["hero1","hero2","hero3","hero4"];
@@ -50,6 +54,12 @@ class PlayerState {
       { actionId: "Elixir2", instanceId: "item28" },
       { actionId: "Elixir2", instanceId: "item29" },
       { actionId: "Elixir3", instanceId: "item30" },
+    ];
+    this.weapons = [
+      { Id: "Sword1", instanceId: "weapon1" },
+      { Id: "Sword2", instanceId: "weapon2" },
+      { Id: "Axe1", instanceId: "weapon3" },
+      // ...outras armas
     ];
     this.storyFlags = {};
   }

@@ -10,6 +10,7 @@ class Combatant {
     this.originalAttack = this.attack;
     this.originalMagicAttack = this.magicAttack;
     this.originalMagicDefense = this.magicDefense;
+    this.originalXp = this.xp;
 
     this.statusEffects = {}; // Armazena múltiplos status
   }
